@@ -1,7 +1,13 @@
-import * as React from "react";
+import { Heading, Flex } from "@chakra-ui/react";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <Flex height="100vh" alignItems="center" justifyContent="center">
+        <Heading>Building Game Hub App</Heading>
+      </Flex>
+    </>
+  );
 };
 
 export default App;
