@@ -1,11 +1,17 @@
-import { Heading, Box } from "@chakra-ui/react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const App = () => {
-  return (
-    <Box m={5}>
-      <Heading mb={5}>Building Attendance App</Heading>
-    </Box>
-  );
-};
+import Home from "@pages/Home";
+import AboutPage from "@pages/About";
+import ContactPage from "@pages/Contact";
+
+const router = createBrowserRouter([
+  { path: "/", element: <Home /> },
+  { path: "/about", element: <AboutPage /> },
+  { path: "/contact", element: <ContactPage /> },
+]);
+
+function App() {
+  return <RouterProvider router={router} />;
+}
 
 export default App;
