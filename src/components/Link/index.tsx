@@ -8,7 +8,15 @@ interface ILink {
 
 export const LinkComp = ({ destination, linkText }: ILink) => {
   return (
-    <Link as={NavLink} to={`${destination}`} p="2">
+    <Link
+      as={NavLink}
+      to={`${destination}`}
+      p="2"
+      _hover={{
+        textDecoration: "none",
+      }}
+      fontSize="17px"
+    >
       {linkText}
     </Link>
   );
