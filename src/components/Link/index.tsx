@@ -1,5 +1,5 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { Link } from "@chakra-ui/react";
 
 interface ILink {
   destination: string;
@@ -8,16 +8,8 @@ interface ILink {
 
 export const LinkComp = ({ destination, linkText }: ILink) => {
   return (
-    <Link
-      as={NavLink}
-      to={`${destination}`}
-      p="2"
-      _hover={{
-        textDecoration: "none",
-      }}
-      fontSize="17px"
-    >
+    <NavLink to={destination} className="px-2 hover:no-underline text-base">
       {linkText}
-    </Link>
+    </NavLink>
   );
 };
