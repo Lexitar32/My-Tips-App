@@ -1,26 +1,7 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
+import * as React from "react";
 
-import Home from "@pages/PublicPages/Home";
-import Meetings from "@pages/ProtectedPages/Meetings";
+const DashboardPage = () => {
+  return <h1>Main Page</h1>;
+};
 
-import DashboardLayout from "@layouts/DashboardLayout";
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<DashboardLayout />}>
-      <Route index element={<Home />} />
-      <Route path="meetings" element={<Meetings />} />
-    </Route>
-  )
-);
-
-function Dashboard() {
-  return <RouterProvider router={router} />;
-}
-
-export default Dashboard;
+export default DashboardPage;
