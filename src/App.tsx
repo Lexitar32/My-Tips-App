@@ -25,7 +25,14 @@ import PrivateRoutes from "@utils/PrivateRoutes";
 const routes = createRoutesFromElements(
   <Route>
     <Route element={<PrivateRoutes />}>
-      <Route path="/dashboard/*" element={<DashboardLayout />}>
+      <Route
+        path="/dashboard/*"
+        element={
+          <Suspense fallback={<Loader />}>
+            <DashboardLayout />
+          </Suspense>
+        }
+      >
         <Route index element={<Dashboard />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="meetings" element={<Meetings />} />
