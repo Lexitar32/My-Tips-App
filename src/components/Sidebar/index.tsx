@@ -1,5 +1,4 @@
 import * as React from "react";
-import Logo from "@assets/logo/logo.svg";
 import { NavLink, useLocation } from "react-router-dom";
 import SidebarLinkGroup from "./SidebarLinkGroup";
 
@@ -65,7 +64,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <NavLink to="/dashboard">
-          <img src={Logo} alt="Logo" />
+          <h3 className="text-xl font-bold">RollCall</h3>
         </NavLink>
 
         <button
@@ -92,9 +91,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
 
-      <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
+      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
+        <nav className="px-4 py-4 mt-5 lg:mt-9 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
             <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
