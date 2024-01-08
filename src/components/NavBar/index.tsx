@@ -1,5 +1,13 @@
 import { LinkComp } from "@components/Link";
 
+const navMenu = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Features", path: "/features" },
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Contact", path: "/contact" },
+];
+
 export const NavBar = () => {
   return (
     <header className="mx-auto max-w-7xl font-mont fixed top-0 left-0 right-0 z-10 flex justify-between flex-wrap p-4 bg-transparent text-white">
@@ -8,21 +16,11 @@ export const NavBar = () => {
       </div>
 
       <div className="flex items-center justify-between">
-        <div className="p-2">
-          <LinkComp linkText="Home" destination="/" />
-        </div>
-        <div className="p-2">
-          <LinkComp linkText="About" destination="/about" />
-        </div>
-        <div className="p-2">
-          <LinkComp linkText="Features" destination="/features" />
-        </div>
-        <div className="p-2">
-          <LinkComp linkText="Testimonials" destination="/testimonials" />
-        </div>
-        <div className="p-2">
-          <LinkComp linkText="Contact" destination="/contact" />
-        </div>
+        {navMenu.map((menu) => (
+          <div className="p-2">
+            <LinkComp linkText={`${menu.name}`} destination={`${menu.path}`} />
+          </div>
+        ))}
       </div>
 
       <div className="flex">

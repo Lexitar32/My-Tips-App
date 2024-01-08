@@ -5,8 +5,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Home from "@pages/Home";
-import Meetings from "@pages/Meetings";
+import Home from "@pages/PublicPages/Home";
+import Meetings from "@pages/ProtectedPages/Meetings";
 
 import DashboardLayout from "@layouts/DashboardLayout";
 
