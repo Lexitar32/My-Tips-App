@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
 interface ILink {
@@ -8,7 +7,7 @@ interface ILink {
 
 export const LinkComp = ({ destination, linkText }: ILink) => {
   return (
-    <NavLink to={destination} className="px-2 hover:no-underline text-base">
+    <NavLink to={destination} className="px-2 text-base hover:no-underline">
       {linkText}
     </NavLink>
   );
