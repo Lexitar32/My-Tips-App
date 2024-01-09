@@ -9,18 +9,11 @@ import {
 // Layouts
 const DashboardLayout = lazy(() => import("@layouts/DashboardLayout"));
 
-// Pages
-import Home from "@pages/PublicPages/Home";
-import AboutPage from "@pages/PublicPages/About";
-import ContactPage from "@pages/PublicPages/Contact";
-import NotFoundPage from "@pages/PublicPages/NotFound";
-import Meetings from "@pages/ProtectedPages/Dashboard/Meetings";
-import Dashboard from "@pages/ProtectedPages/Dashboard";
-import ProfilePage from "@pages/ProtectedPages/Dashboard/Profile";
-
 // Components
 import Loader from "@utils/Loader";
 import PrivateRoutes from "@utils/PrivateRoutes";
+import { privateRoutes, publicRoutes } from "./routes";
+import Dashboard from "@pages/ProtectedPages/Dashboard";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -34,14 +27,36 @@ const routes = createRoutesFromElements(
         }
       >
         <Route index element={<Dashboard />} />
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="meetings" element={<Meetings />} />
+        {privateRoutes.map((routes, index) => {
+          const { path, component: Component } = routes;
+          return (
+            <Route
+              key={index}
+              path={path}
+              element={
+                <Suspense fallback={<Loader />}>
+                  <Component />
+                </Suspense>
+              }
+            />
+          );
+        })}
       </Route>
     </Route>
-    <Route index element={<Home />} />
-    <Route path="/about" element={<AboutPage />} />
-    <Route path="/contact" element={<ContactPage />} />
-    <Route path="*" element={<NotFoundPage />} />
+    {publicRoutes.map((routes, index) => {
+      const { path, component: Component } = routes;
+      return (
+        <Route
+          key={index}
+          path={path}
+          element={
+            <Suspense fallback={<Loader />}>
+              <Component />
+            </Suspense>
+          }
+        />
+      );
+    })}
   </Route>
 );
 
