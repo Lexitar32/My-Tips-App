@@ -1,4 +1,3 @@
-import * as React from "react";
 import { AuthenticationIcon } from "@assets/icons/Authentication";
 import { CloseMenuIcon } from "@assets/icons/CloseMenu";
 import { DashboardIcon } from "@assets/icons/DashboardIcon";
