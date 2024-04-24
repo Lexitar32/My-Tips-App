@@ -1,14 +1,13 @@
-import { AuthenticationIcon } from "@assets/icons/Authentication";
-import { CloseMenuIcon } from "@assets/icons/CloseMenu";
-import { DashboardIcon } from "@assets/icons/DashboardIcon";
 import { NavLink, useLocation } from "react-router-dom";
+import { CloseMenuIcon } from "@assets/icons/CloseMenu";
 import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { useEscapeKey } from "@hooks/useEscapeKey";
+import { navMenuData } from "../../constants/navMenus";
 
-interface SidebarProps {
+type SidebarProps = {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
-}
+};
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const location = useLocation();
@@ -47,31 +46,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               MENU
             </h3>
 
-            <div className="mb-4 flex flex-col gap-1.5">
-              <NavLink
-                to="/dashboard"
-                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                  (pathname === "/" || pathname.includes("dashboard")) &&
-                  "bg-graydark dark:bg-meta-4"
-                }`}
-              >
-                <DashboardIcon />
-                Dashboard
-              </NavLink>
-            </div>
-
-            <div className="mb-6 flex flex-col gap-1.5">
-              <NavLink
-                to="/dashboard"
-                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                  (pathname === "/auth" || pathname.includes("auth")) &&
-                  "bg-graydark dark:bg-meta-4"
-                }`}
-              >
-                <AuthenticationIcon />
-                Logout
-              </NavLink>
-            </div>
+            {navMenuData.map((menu) => (
+              <div className="mb-4 flex flex-col gap-1.5">
+                <NavLink
+                  to={`/${menu.path}`}
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes(`/${menu.path}`) &&
+                    "bg-graydark dark:bg-meta-4"
+                  }`}
+                >
+                  <menu.icon />
+                  {menu.title}
+                </NavLink>
+              </div>
+            ))}
           </div>
         </nav>
       </div>
