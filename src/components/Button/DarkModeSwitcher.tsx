@@ -1,6 +1,6 @@
-import { useColorMode } from "../hooks/useColorMode";
+import { useColorMode } from "../../hooks/useColorMode";
 
-const DarkModeSwitcher = () => {
+export const DarkModeSwitcher = () => {
   const { colorMode, setColorMode } = useColorMode();
 
   return (
@@ -61,5 +61,3 @@ const DarkModeSwitcher = () => {
     </li>
   );
 };
-
-export default DarkModeSwitcher;

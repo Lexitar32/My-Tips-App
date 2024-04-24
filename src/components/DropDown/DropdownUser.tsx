@@ -6,7 +6,7 @@ import { useEscapeKey } from "@hooks/useEscapeKey";
 import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { dropDownMenu } from "@constants/navMenus";
 
-const DropdownUser = () => {
+export const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   // Close sidebar by pressing escape key
@@ -84,5 +84,3 @@ const DropdownUser = () => {
     </div>
   );
 };
-
-export default DropdownUser;

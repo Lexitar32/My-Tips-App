@@ -1,8 +1,8 @@
-interface ISearchIcon {
+type ISearchIcon = {
   className: string;
-}
+};
 
-function SearchIcon(props: ISearchIcon) {
+export const SearchIcon = (props: ISearchIcon) => {
   return (
     <svg
       width={20}
@@ -16,6 +16,4 @@ function SearchIcon(props: ISearchIcon) {
       <path d="M13.286 13.286a.833.833 0 011.178 0l3.625 3.625a.833.833 0 11-1.178 1.178l-3.625-3.625a.833.833 0 010-1.178z" />
     </svg>
   );
-}
-
-export default SearchIcon;
+};

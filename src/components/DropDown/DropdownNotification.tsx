@@ -3,7 +3,7 @@ import { useEscapeKey } from "@hooks/useEscapeKey";
 import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { Link } from "react-router-dom";
 
-const DropdownNotification = () => {
+export const DropdownNotification = () => {
   const [open, setOpen] = React.useState(false);
   // Close sidebar by pressing escape key
   useEscapeKey({ open, setOpen });
@@ -74,5 +74,3 @@ const DropdownNotification = () => {
     </li>
   );
 };
-
-export default DropdownNotification;

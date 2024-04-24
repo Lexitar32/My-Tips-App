@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import DarkModeSwitcher from "@components/DarkModeSwitcher";
-import DropdownNotification from "@components/DropdownNotification";
-import DropdownUser from "@components/DropdownUser";
+import { DarkModeSwitcher } from "@components/Button/DarkModeSwitcher";
+import { DropdownNotification } from "@components/DropDown/DropdownNotification";
+import { DropdownUser } from "@components/DropDown/DropdownUser";
 import { Input } from "@components/Input";
-import SearchIcon from "@assets/icons/SearchIcon";
+import { SearchIcon } from "@assets/icons/SearchIcon";
 
 type DashboardHeaderProps = {
   sidebarOpen: string | boolean | undefined;
