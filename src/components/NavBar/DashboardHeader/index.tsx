@@ -57,7 +57,7 @@ const DashboardHeader = ({ sidebarOpen, setSidebarOpen }: IDashboardHeader) => {
           </button>
 
           <Link className="flex-shrink-0 block lg:hidden" to="/">
-            <h3 className="text-xl font-bold">RollCall</h3>
+            <h3 className="text-xl font-bold">Budget App</h3>
           </Link>
         </div>
 
