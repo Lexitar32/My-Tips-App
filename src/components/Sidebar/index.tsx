@@ -14,7 +14,9 @@ interface SidebarProps {
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const location = useLocation();
   const { pathname } = location;
+  // Close sidebar by pressing escape key
   useEscapeKey({ sidebarOpen, setSidebarOpen });
+  // Close sidebar by clicking outside of the sidebar menu
   const { trigger, sidebar } = useOnClickOutside({
     sidebarOpen,
     setSidebarOpen,
