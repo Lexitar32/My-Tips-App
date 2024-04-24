@@ -1,28 +1,25 @@
 import React from "react";
 
 type ClickOutsideProps = {
-  sidebarOpen: boolean;
-  setSidebarOpen: (arg: boolean) => void;
+  open: boolean;
+  setOpen: (arg: boolean) => void;
 };
 
-export const useOnClickOutside = ({
-  sidebarOpen,
-  setSidebarOpen,
-}: ClickOutsideProps) => {
+export const useOnClickOutside = ({ open, setOpen }: ClickOutsideProps) => {
   const trigger = React.useRef<any>(null);
-  const sidebar = React.useRef<any>(null);
+  const component = React.useRef<any>(null);
 
   // close on click outside
   React.useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
-      if (!sidebar.current || !trigger.current) return;
+      if (!component.current || !trigger.current) return;
       if (
-        !sidebarOpen ||
-        sidebar.current.contains(target) ||
+        !open ||
+        component.current.contains(target) ||
         trigger.current.contains(target)
       )
         return;
-      setSidebarOpen(false);
+      setOpen(false);
     };
     document.addEventListener("click", clickHandler);
     return () => document.removeEventListener("click", clickHandler);
@@ -30,6 +27,6 @@ export const useOnClickOutside = ({
 
   return {
     trigger,
-    sidebar,
+    component,
   };
 };

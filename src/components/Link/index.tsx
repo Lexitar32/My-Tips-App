@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 
-interface ILink {
+type ILink = {
   destination: string;
   linkText: string;
-}
+};
 
 export const LinkComp = ({ destination, linkText }: ILink) => {
   return (

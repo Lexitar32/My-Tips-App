@@ -1,42 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import * as React from "react";
+import { useEscapeKey } from "@hooks/useEscapeKey";
+import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { Link } from "react-router-dom";
 
 const DropdownNotification = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const trigger = useRef<any>(null);
-  const dropdown = useRef<any>(null);
-
-  useEffect(() => {
-    const clickHandler = ({ target }: MouseEvent) => {
-      if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
-      setDropdownOpen(false);
-    };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
-  });
-
-  // close if the esc key is pressed
-  useEffect(() => {
-    const keyHandler = ({ keyCode }: KeyboardEvent) => {
-      if (!dropdownOpen || keyCode !== 27) return;
-      setDropdownOpen(false);
-    };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+  const [open, setOpen] = React.useState(false);
+  // Close sidebar by pressing escape key
+  useEscapeKey({ open, setOpen });
+  // Close sidebar by clicking outside of the sidebar menu
+  const { trigger, component: dropdown } = useOnClickOutside({
+    open,
+    setOpen,
   });
 
   return (
     <li className="relative">
       <Link
         ref={trigger}
-        onClick={() => setDropdownOpen(!dropdownOpen)}
+        onClick={() => setOpen(!open)}
         to="#"
         className="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
       >
@@ -61,10 +42,10 @@ const DropdownNotification = () => {
 
       <div
         ref={dropdown}
-        onFocus={() => setDropdownOpen(true)}
-        onBlur={() => setDropdownOpen(false)}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
         className={`absolute -right-27 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
-          dropdownOpen === true ? "block" : "hidden"
+          open === true ? "block" : "hidden"
         }`}
       >
         <div className="px-4.5 py-3">
@@ -86,21 +67,6 @@ const DropdownNotification = () => {
               </p>
 
               <p className="text-xs">12 May, 2025</p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              to="#"
-            >
-              <p className="text-sm">
-                <span className="text-black dark:text-white">
-                  It is a long established fact
-                </span>{" "}
-                that a reader will be distracted by the readable.
-              </p>
-
-              <p className="text-xs">24 Feb, 2025</p>
             </Link>
           </li>
         </ul>

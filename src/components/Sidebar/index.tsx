@@ -2,7 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { CloseMenuIcon } from "@assets/icons/CloseMenu";
 import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { useEscapeKey } from "@hooks/useEscapeKey";
-import { navMenuData } from "../../constants/navMenus";
+import { navMenuData } from "@constants/navMenus";
 
 type SidebarProps = {
   sidebarOpen: boolean;
@@ -13,11 +13,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const location = useLocation();
   const { pathname } = location;
   // Close sidebar by pressing escape key
-  useEscapeKey({ sidebarOpen, setSidebarOpen });
+  useEscapeKey({ open: sidebarOpen, setOpen: setSidebarOpen });
   // Close sidebar by clicking outside of the sidebar menu
-  const { trigger, sidebar } = useOnClickOutside({
-    sidebarOpen,
-    setSidebarOpen,
+  const { trigger, component: sidebar } = useOnClickOutside({
+    open: sidebarOpen,
+    setOpen: setSidebarOpen,
   });
 
   return (

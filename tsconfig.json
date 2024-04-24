@@ -28,7 +28,8 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@services/*": ["src/services/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@features/*": ["src/features/*"]
+      "@features/*": ["src/features/*"],
+      "@constants/*": ["src/constants/*"]
     }
   },
   "include": ["src"],

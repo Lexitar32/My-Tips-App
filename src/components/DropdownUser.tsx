@@ -1,51 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import UserOne from "@assets/user/user-01.png";
 import { LogoutIcon } from "@assets/icons/Logout";
-import { SettingIcon } from "@assets/icons/SettingIcon";
-import { ContactIcon } from "@assets/icons/ContactIcon";
-import { ProfileIcon } from "@assets/icons/ProfileIcon";
-
-const dropDownMenu = [
-  { name: "My Profile", icon: <ProfileIcon />, path: "/dashboard/profile" },
-  { name: "My Contacts", icon: <ContactIcon />, path: "/dashboard/contact" },
-  {
-    name: "Account Settings",
-    icon: <SettingIcon />,
-    path: "/dashboard/settings",
-  },
-];
+import { useEscapeKey } from "@hooks/useEscapeKey";
+import { useOnClickOutside } from "@hooks/useOnClickOutside";
+import { dropDownMenu } from "@constants/navMenus";
 
 const DropdownUser = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
-  const trigger = useRef<any>(null);
-  const dropdown = useRef<any>(null);
-
-  // close on click outside
-  useEffect(() => {
-    const clickHandler = ({ target }: MouseEvent) => {
-      if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
-      setDropdownOpen(false);
-    };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
-  });
-
-  // close if the esc key is pressed
-  useEffect(() => {
-    const keyHandler = ({ keyCode }: KeyboardEvent) => {
-      if (!dropdownOpen || keyCode !== 27) return;
-      setDropdownOpen(false);
-    };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+  // Close sidebar by pressing escape key
+  useEscapeKey({ open: dropdownOpen, setOpen: setDropdownOpen });
+  // Close sidebar by clicking outside of the sidebar menu
+  const { trigger, component: dropdown } = useOnClickOutside({
+    open: dropdownOpen,
+    setOpen: setDropdownOpen,
   });
 
   return (
@@ -98,10 +67,10 @@ const DropdownUser = () => {
           {dropDownMenu.map((menu) => (
             <li>
               <Link
-                to={menu.path}
+                to={`/${menu.path}`}
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
               >
-                {menu.icon}
+                <menu.icon />
                 {menu.name}
               </Link>
             </li>

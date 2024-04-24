@@ -5,12 +5,15 @@ import DropdownUser from "@components/DropdownUser";
 import { Input } from "@components/Input";
 import SearchIcon from "@assets/icons/SearchIcon";
 
-interface IDashboardHeader {
+type DashboardHeaderProps = {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
-}
+};
 
-const DashboardHeader = ({ sidebarOpen, setSidebarOpen }: IDashboardHeader) => {
+const DashboardHeader = ({
+  sidebarOpen,
+  setSidebarOpen,
+}: DashboardHeaderProps) => {
   return (
     <header className="sticky top-0 flex w-full bg-white font-mont z-999 drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex items-center justify-between flex-grow px-4 py-4 shadow-2 md:px-6 2xl:px-11">
