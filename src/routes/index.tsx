@@ -1,4 +1,3 @@
-// routes.js
 import { lazy } from "react";
 
 // Pages
@@ -6,6 +5,7 @@ const Home = lazy(() => import("@pages/PublicPages/index"));
 const ProfilePage = lazy(
   () => import("@pages/ProtectedPages/Dashboard/Profile")
 );
+const Dashboard = lazy(() => import("@pages/ProtectedPages/Dashboard/index"));
 
 const publicRoutes = [
   {
@@ -16,6 +16,11 @@ const publicRoutes = [
 ];
 
 const privateRoutes = [
+  {
+    path: "",
+    title: "Dashboard",
+    component: Dashboard,
+  },
   {
     path: "profile",
     title: "Profile",

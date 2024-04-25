@@ -6,9 +6,9 @@ const checkAuthentication = () => {
 };
 
 const PrivateRoutes = () => {
-  const auth = checkAuthentication();
+  const { token } = checkAuthentication();
 
-  return auth.token ? <Outlet /> : <Navigate to="/" />;
+  return token ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PrivateRoutes;

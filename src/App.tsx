@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -13,7 +13,6 @@ const DashboardLayout = lazy(() => import("@layouts/DashboardLayout"));
 import Loader from "@utils/Loader";
 import PrivateRoutes from "@utils/PrivateRoutes";
 import { privateRoutes, publicRoutes } from "./routes";
-import Dashboard from "@pages/ProtectedPages/Dashboard";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -26,7 +25,6 @@ const routes = createRoutesFromElements(
           </Suspense>
         }
       >
-        <Route index element={<Dashboard />} />
         {privateRoutes.map((routes, index) => {
           const { path, component: Component } = routes;
           return (
@@ -63,12 +61,6 @@ const routes = createRoutesFromElements(
 const router = createBrowserRouter(routes);
 
 function App() {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
-
   return <RouterProvider router={router} />;
 }
 
