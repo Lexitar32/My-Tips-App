@@ -10,7 +10,7 @@ import {
 const DashboardLayout = lazy(() => import("@layouts/Dashboard"));
 
 // Components
-import Loader from "@utils/Loader";
+import Loader from "@components/common/Loader";
 import PrivateRoutes from "@utils/PrivateRoutes";
 import { privateRoutes, publicRoutes } from "./routes";
 
