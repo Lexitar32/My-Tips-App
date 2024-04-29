@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 // Layouts
-const DashboardLayout = lazy(() => import("@layouts/DashboardLayout"));
+const DashboardLayout = lazy(() => import("@layouts/Dashboard"));
 
 // Components
 import Loader from "@utils/Loader";

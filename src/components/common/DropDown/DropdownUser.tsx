@@ -2,8 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import UserOne from "@assets/user/user-01.png";
 import { LogoutIcon } from "@assets/icons/Logout";
-import { useEscapeKey } from "@hooks/useEscapeKey";
-import { useOnClickOutside } from "@hooks/useOnClickOutside";
+import { useEscapeKey } from "@hooks/common/useEscapeKey";
+import { useOnClickOutside } from "@hooks/common/useOnClickOutside";
 import { dropDownMenu } from "@constants/navMenus";
 
 export const DropdownUser = () => {

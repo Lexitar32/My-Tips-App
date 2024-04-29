@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { CloseMenuIcon } from "@assets/icons/CloseMenu";
-import { useOnClickOutside } from "@hooks/useOnClickOutside";
-import { useEscapeKey } from "@hooks/useEscapeKey";
+import { useOnClickOutside } from "@hooks/common/useOnClickOutside";
+import { useEscapeKey } from "@hooks/common/useEscapeKey";
 import { navMenuData } from "@constants/navMenus";
 
 type SidebarProps = {

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { DarkModeSwitcher } from "@components/Button/DarkModeSwitcher";
-import { DropdownNotification } from "@components/DropDown/DropdownNotification";
-import { DropdownUser } from "@components/DropDown/DropdownUser";
-import { Input } from "@components/Input";
+import { DarkModeSwitcher } from "@components/common/Button/DarkModeSwitcher";
+import { DropdownNotification } from "@components/common/DropDown/DropdownNotification";
+import { DropdownUser } from "@components/common/DropDown/DropdownUser";
+import { Input } from "@components/common/Input";
 import { SearchIcon } from "@assets/icons/SearchIcon";
 
 type DashboardHeaderProps = {
