@@ -1,3 +1,3 @@
-export const formatString = () => {
-  console.log("String formatting");
+export const formatAmount = (amount: number) => {
+  return amount.toLocaleString();
 };

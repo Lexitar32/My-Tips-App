@@ -15,7 +15,7 @@ const DashboardHeader = ({
   setSidebarOpen,
 }: DashboardHeaderProps) => {
   return (
-    <header className="sticky top-0 flex w-full bg-white font-mont z-999 drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+    <header className="sticky top-0 flex w-full bg-white font-mont drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none z-9999">
       <div className="flex items-center justify-between flex-grow px-4 py-4 shadow-2 md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           <button

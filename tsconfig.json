@@ -24,6 +24,7 @@
       "@utils/*": ["src/utils/*"],
       "@test/*": ["src/test/*"],
       "@pages/*": ["src/pages/*"],
+      "@states/*": ["src/states/*"],
       "@styles/*": ["src/styles/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@services/*": ["src/services/*"],
