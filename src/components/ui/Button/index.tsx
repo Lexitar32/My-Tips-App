@@ -10,8 +10,9 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles = {
-  contained: "bg-white text-black dark:text-white",
-  outlined: "border border-boxdark-2",
+  contained:
+    "bg-black text-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none",
+  outlined: "border border-black",
   text: "text-black",
 };
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import UserOne from "@assets/user/user-01.png";
+import UserOne from "@assets/user/user-one.png";
 import { LogoutIcon } from "@assets/icons/Logout";
 import { useEscapeKey } from "@hooks/common/useEscapeKey";
 import { useOnClickOutside } from "@hooks/common/useOnClickOutside";
@@ -32,9 +32,7 @@ export const DropdownUser = () => {
           <span className="block text-xs">Software Engineer</span>
         </span>
 
-        <span className="w-12 h-12 rounded-full">
-          <img src={UserOne} alt="User" />
-        </span>
+        <img className="w-12 h-12 rounded-full" src={UserOne} alt="User" />
 
         <svg
           className={`hidden fill-current sm:block ${

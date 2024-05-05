@@ -28,7 +28,7 @@ const DashboardPage = () => {
           onClick={handleModal}
         />
 
-        <TransactionModal openModal={openModal} />
+        <TransactionModal openModal={openModal} setOpenModal={setOpenModal} />
       </div>
     </div>
   );

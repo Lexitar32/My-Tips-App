@@ -1,8 +1,8 @@
-type CloseMenuIconProps = {
-  trigger: any;
-  sidebarOpen: boolean;
+interface CloseMenuIconProps {
+  trigger?: any;
+  sidebarOpen?: boolean;
   setSidebarOpen: any;
-};
+}
 
 export const CloseMenuIcon = ({
   trigger,

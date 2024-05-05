@@ -1,32 +1,30 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 
-type ClickOutsideProps = {
+interface ClickOutsideProps {
   open: boolean;
   setOpen: (arg: boolean) => void;
-};
+}
 
 export const useOnClickOutside = ({ open, setOpen }: ClickOutsideProps) => {
-  const trigger = React.useRef<any>(null);
-  const component = React.useRef<any>(null);
+  const trigger = useRef<any>(null);
+  const component = useRef<any>(null);
 
-  // close on click outside
-  React.useEffect(() => {
+  useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
-      if (!component.current || !trigger.current) return;
       if (
         !open ||
+        !component.current ||
+        !trigger.current ||
         component.current.contains(target) ||
         trigger.current.contains(target)
       )
         return;
       setOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
-  });
 
-  return {
-    trigger,
-    component,
-  };
+    document.addEventListener("mousedown", clickHandler);
+    return () => document.removeEventListener("mousedown", clickHandler);
+  }, [open, setOpen]);
+
+  return { trigger, component };
 };
