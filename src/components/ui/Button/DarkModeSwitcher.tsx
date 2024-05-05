@@ -1,4 +1,4 @@
-import { useColorMode } from "../../../hooks/common/useColorMode";
+import { useColorMode } from "@hooks/common/useColorMode";
 
 export const DarkModeSwitcher = () => {
   const { colorMode, setColorMode } = useColorMode();

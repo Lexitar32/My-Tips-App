@@ -33,7 +33,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
     <button
       {...rest}
       ref={ref}
-      className={`${variantClassName} ${sizeClassName} ${className} flex items-center rounded-lg cursor-pointer font-mont z-999 drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none`}
+      className={`${variantClassName} ${sizeClassName} ${className} flex items-center rounded-lg cursor-pointer font-mont`}
     >
       {withIcon && (
         <div className="pr-1">

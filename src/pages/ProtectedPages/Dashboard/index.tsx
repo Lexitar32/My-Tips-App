@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useBudget } from "@states/BudgetContext";
+import { useBudget } from "src/contexts/BudgetContext";
 import { BalanceCard } from "@components/BalanceCard";
 import { Button } from "@components/ui/Button";
 import { TransactionModal } from "@components/common/Modal/TransactionModal";
