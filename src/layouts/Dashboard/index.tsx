@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "@components/common/NavBar/Dashboard";
 import Sidebar from "@components/common/Sidebar";
 import { Outlet } from "react-router-dom";
-import { BudgetProvider } from "src/contexts/BudgetContext";
+import { BudgetProvider } from "@contexts/BudgetContext";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

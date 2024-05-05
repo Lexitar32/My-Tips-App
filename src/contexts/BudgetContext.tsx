@@ -1,5 +1,5 @@
 import * as React from "react";
-import { budgetReducer } from "src/contexts/reducers/budgetReducer";
+import { budgetReducer } from "@contexts/reducers/budgetReducer";
 import {
   BudgetAction,
   BudgetProviderProps,
