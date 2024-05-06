@@ -15,7 +15,7 @@ export const CloseMenuIcon = ({
       onClick={() => setSidebarOpen(!sidebarOpen)}
       aria-controls="sidebar"
       aria-expanded={sidebarOpen}
-      className="block lg:hidden"
+      className="hidden lg:block"
     >
       <svg
         className="fill-current"

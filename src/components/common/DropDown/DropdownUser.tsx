@@ -62,8 +62,8 @@ export const DropdownUser = () => {
         }`}
       >
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
-          {dropDownMenu.map((menu) => (
-            <li>
+          {dropDownMenu.map((menu, index) => (
+            <li key={index}>
               <Link
                 to={`/${menu.path}`}
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"

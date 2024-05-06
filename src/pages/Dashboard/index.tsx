@@ -3,10 +3,11 @@ import { useBudget } from "@contexts/BudgetContext";
 import { BalanceCard } from "@components/BalanceCard";
 import { Button } from "@components/ui/Button";
 import { TransactionModal } from "@components/common/Modal/TransactionModal";
+import { useModalContext } from "@contexts/ModalContext";
 
 const DashboardPage = () => {
   const { state, dispatch } = useBudget();
-  const [openModal, setOpenModal] = React.useState(false);
+  const { openModal, setOpenModal } = useModalContext();
 
   const handleModal = () => {
     setOpenModal(!openModal);
@@ -28,7 +29,7 @@ const DashboardPage = () => {
           onClick={handleModal}
         />
 
-        <TransactionModal openModal={openModal} setOpenModal={setOpenModal} />
+        <TransactionModal />
       </div>
     </div>
   );

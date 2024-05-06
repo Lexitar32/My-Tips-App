@@ -1,13 +1,15 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { CloseMenuIcon } from "@assets/icons/CloseSidebar";
 import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { useEscapeKey } from "@hooks/useEscapeKey";
 import { navMenuData } from "@constants/navMenus";
-import { useMenuContext } from "@contexts/MenuContext";
 
-const Sidebar = () => {
+interface Props {
+  sidebarOpen: boolean;
+  setSidebarOpen: (value: boolean) => void;
+}
+
+const Sidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
-  const { sidebarOpen, setSidebarOpen } = useMenuContext();
   const { pathname } = location;
   // Close sidebar by pressing escape key
   useEscapeKey({ open: sidebarOpen, setOpen: setSidebarOpen });
@@ -28,12 +30,6 @@ const Sidebar = () => {
         <NavLink to="/dashboard">
           <h3 className="text-xl font-bold">Budget App</h3>
         </NavLink>
-
-        <CloseMenuIcon
-          trigger={trigger}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-        />
       </div>
 
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
@@ -43,8 +39,8 @@ const Sidebar = () => {
               MENU
             </h3>
 
-            {navMenuData.map((menu) => (
-              <div className="mb-4 flex flex-col gap-1.5">
+            {navMenuData.map((menu, index) => (
+              <div key={index} className="mb-4 flex flex-col gap-1.5">
                 <NavLink
                   to={`/${menu.path}`}
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${

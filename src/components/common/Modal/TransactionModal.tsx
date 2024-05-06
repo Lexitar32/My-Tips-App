@@ -2,16 +2,11 @@ import { Fragment } from "react";
 import { Transition } from "@headlessui/react";
 import { CancelIcon } from "@assets/icons/CancelIcon";
 import { Button } from "@components/ui/Button";
+import { useModalContext } from "@contexts/ModalContext";
 
-interface Props {
-  openModal: boolean;
-  setOpenModal: (value: boolean) => void;
-}
+export const TransactionModal: React.FC = () => {
+  const { openModal, setOpenModal } = useModalContext();
 
-export const TransactionModal: React.FC<Props> = ({
-  openModal,
-  setOpenModal,
-}) => {
   return (
     <Transition
       show={openModal}

@@ -4,11 +4,13 @@ import { DropdownNotification } from "@components/common/DropDown/DropdownNotifi
 import { DropdownUser } from "@components/common/DropDown/DropdownUser";
 import { Input } from "@components/ui/Input";
 import { SearchIcon } from "@assets/icons/SearchIcon";
-import { useMenuContext } from "@contexts/MenuContext";
 
-const DashboardHeader = () => {
-  const { sidebarOpen, setSidebarOpen } = useMenuContext();
+interface Props {
+  sidebarOpen: boolean;
+  setSidebarOpen: (value: boolean) => void;
+}
 
+const DashboardHeader: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <header className="sticky top-0 flex w-full bg-white font-mont drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none z-9999">
       <div className="flex items-center justify-between flex-grow px-4 py-4 shadow-2 md:px-6 2xl:px-11">

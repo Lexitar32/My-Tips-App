@@ -14,7 +14,6 @@ import Loader from "@components/Loader";
 import PrivateRoutes from "@utils/PrivateRoutes";
 import { privateRoutes, publicRoutes } from "./routes";
 import { BudgetProvider } from "@contexts/BudgetContext";
-import { MenuProvider } from "@contexts/MenuContext";
 import { ModalProvider } from "@contexts/ModalContext";
 
 const routes = createRoutesFromElements(
@@ -25,11 +24,9 @@ const routes = createRoutesFromElements(
         element={
           <Suspense fallback={<Loader />}>
             <BudgetProvider>
-              <MenuProvider>
-                <ModalProvider>
-                  <DashboardLayout />
-                </ModalProvider>
-              </MenuProvider>
+              <ModalProvider>
+                <DashboardLayout />
+              </ModalProvider>
             </BudgetProvider>
           </Suspense>
         }

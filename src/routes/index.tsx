@@ -2,10 +2,8 @@ import { lazy } from "react";
 
 // Pages
 const Home = lazy(() => import("@pages/PublicPages/index"));
-const ProfilePage = lazy(
-  () => import("@pages/ProtectedPages/Dashboard/Profile")
-);
-const Dashboard = lazy(() => import("@pages/ProtectedPages/Dashboard/index"));
+const ProfilePage = lazy(() => import("@pages/Dashboard/Profile"));
+const Dashboard = lazy(() => import("@pages/Dashboard/index"));
 
 const publicRoutes = [
   {
