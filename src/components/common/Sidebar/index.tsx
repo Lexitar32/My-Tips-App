@@ -3,14 +3,11 @@ import { CloseMenuIcon } from "@assets/icons/CloseSidebar";
 import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { useEscapeKey } from "@hooks/useEscapeKey";
 import { navMenuData } from "@constants/navMenus";
+import { useMenuContext } from "@contexts/MenuContext";
 
-type SidebarProps = {
-  sidebarOpen: boolean;
-  setSidebarOpen: (arg: boolean) => void;
-};
-
-const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+const Sidebar = () => {
   const location = useLocation();
+  const { sidebarOpen, setSidebarOpen } = useMenuContext();
   const { pathname } = location;
   // Close sidebar by pressing escape key
   useEscapeKey({ open: sidebarOpen, setOpen: setSidebarOpen });

@@ -1,7 +1,26 @@
 import { ReactNode } from "react";
-import { IExpenses } from "./expenses";
-import { Income } from "./income";
-import { ITransactions } from "./transactions";
+
+export interface IExpenses {
+  title: string;
+  description: string;
+  date: string;
+  amount: number;
+}
+
+export interface Income {
+  title: string;
+  description: string;
+  date: string;
+  amount: number;
+}
+
+export interface ITransactions {
+  title: string;
+  description: string;
+  date: string;
+  amount: number;
+  type: string;
+}
 
 export interface BudgetState {
   walletBalance: number;
@@ -10,6 +29,11 @@ export interface BudgetState {
   transactions: ITransactions[];
   incomes: Income[];
   expenses: IExpenses[];
+}
+
+export interface BudgetContextType {
+  state: BudgetState;
+  dispatch: React.Dispatch<BudgetAction>;
 }
 
 export interface BudgetProviderProps {

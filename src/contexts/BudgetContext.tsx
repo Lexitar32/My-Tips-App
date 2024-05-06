@@ -1,10 +1,6 @@
 import * as React from "react";
 import { budgetReducer } from "@contexts/reducers/budgetReducer";
-import {
-  BudgetAction,
-  BudgetProviderProps,
-  BudgetState,
-} from "@interfaces/budget";
+import { BudgetContextType, BudgetProviderProps } from "@interfaces/budget";
 
 const initialState = {
   walletBalance: 0,
@@ -15,13 +11,7 @@ const initialState = {
   expenses: [],
 };
 
-const BudgetContext = React.createContext<{
-  state: BudgetState;
-  dispatch: React.Dispatch<BudgetAction>;
-}>({
-  state: initialState,
-  dispatch: () => null,
-});
+const BudgetContext = React.createContext<BudgetContextType | null>(null);
 
 export const BudgetProvider = ({ children }: BudgetProviderProps) => {
   const [state, dispatch] = React.useReducer(budgetReducer, initialState);

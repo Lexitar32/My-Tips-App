@@ -13,6 +13,9 @@ const DashboardLayout = lazy(() => import("@layouts/Dashboard"));
 import Loader from "@components/Loader";
 import PrivateRoutes from "@utils/PrivateRoutes";
 import { privateRoutes, publicRoutes } from "./routes";
+import { BudgetProvider } from "@contexts/BudgetContext";
+import { MenuProvider } from "@contexts/MenuContext";
+import { ModalProvider } from "@contexts/ModalContext";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -21,7 +24,13 @@ const routes = createRoutesFromElements(
         path="/dashboard/*"
         element={
           <Suspense fallback={<Loader />}>
-            <DashboardLayout />
+            <BudgetProvider>
+              <MenuProvider>
+                <ModalProvider>
+                  <DashboardLayout />
+                </ModalProvider>
+              </MenuProvider>
+            </BudgetProvider>
           </Suspense>
         }
       >
