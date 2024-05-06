@@ -1,7 +1,8 @@
-import { PlusIcon } from "@assets/icons/PlusIcon";
 import { ButtonHTMLAttributes, forwardRef } from "react";
+import { PlusIcon } from "@assets/icons/PlusIcon";
+import { cn } from "@utils/helpers";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "contained" | "outlined" | "text";
   size?: "large" | "medium" | "small";
   className?: string;
@@ -22,25 +23,30 @@ const sizeStyles = {
   large: "px-4 py-3 text-lg",
 };
 
-export const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
-  const { title, withIcon, size, className, variant, ...rest } = props;
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    const { title, withIcon, size, className, variant, ...rest } = props;
 
-  const variantClassName =
-    variantStyles[variant || "contained"] || variantStyles.contained;
-  const sizeClassName = sizeStyles[size || "medium"] || sizeStyles.medium;
+    const variantClassName =
+      variantStyles[variant || "contained"] || variantStyles.contained;
+    const sizeClassName = sizeStyles[size || "medium"] || sizeStyles.medium;
 
-  return (
-    <button
-      {...rest}
-      ref={ref}
-      className={`${variantClassName} ${sizeClassName} ${className} flex items-center rounded-lg cursor-pointer font-mont`}
-    >
-      {withIcon && (
-        <div className="pr-1">
-          <PlusIcon />
-        </div>
-      )}
-      {title}
-    </button>
-  );
-});
+    const mergedClassName = cn(
+      variantClassName,
+      sizeClassName,
+      className,
+      "flex items-center rounded-lg cursor-pointer font-mont"
+    );
+
+    return (
+      <button {...rest} ref={ref} className={mergedClassName}>
+        {withIcon && (
+          <div className="pr-1">
+            <PlusIcon />
+          </div>
+        )}
+        {title}
+      </button>
+    );
+  }
+);
