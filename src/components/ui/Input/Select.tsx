@@ -1,16 +1,20 @@
-import { InputHTMLAttributes, forwardRef } from "react";
+import React, { SelectHTMLAttributes, forwardRef } from "react";
 import { cn } from "@utils/helpers";
 import ErrorMessage from "../ErrorMessage";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   isRequired?: boolean;
   label?: string;
   error?: string;
   formField?: boolean;
+  options: { value: string; label: string }[];
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, error, label, isRequired, formField, ...props }, ref) => {
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  (
+    { className, error, label, isRequired, formField, options, ...props },
+    ref
+  ) => {
     return (
       <div className={`flex flex-col w-full ${formField && "h-25"}`}>
         {label && (
@@ -18,15 +22,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {label} {isRequired && <span className="text-rose-600">*</span>}
           </label>
         )}
-        <input
-          type={type}
+        <select
           className={cn(
             className,
             formField ? "p-2 border border-black rounded" : ""
           )}
           ref={ref}
           {...props}
-        />
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
         {Boolean(error?.trim()) && (
           <ErrorMessage className="mt-1.5" message={error as string} />
         )}
