@@ -25,7 +25,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           className={cn(
             className,
-            formField ? "p-2 border border-black rounded" : ""
+            formField
+              ? "p-2 border border-bodydark1 focus:outline-none rounded"
+              : ""
           )}
           ref={ref}
           {...props}

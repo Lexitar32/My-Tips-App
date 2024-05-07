@@ -5,7 +5,7 @@ import { z } from "zod";
 import { Input } from "@components/ui/Input";
 import { Button } from "@components/ui/Button";
 import { Select } from "@components/ui/Input/Select";
-import { selectOptions } from "@constants/selectOptions";
+import { selectOptions } from "@constants/formOptions";
 import ErrorMessage from "@components/ui/ErrorMessage";
 
 // Define Zod schema for form data validation
@@ -38,8 +38,9 @@ export const TransactionForm: React.FC = () => {
           {...register("description")}
           placeholder="Add description"
           label="Description"
-          className="p-2 border border-black rounded"
           formField={true}
+          type="text"
+          className="text-sm"
           error={errors.description ? errors.description.message : undefined}
         />
         <Input
@@ -47,7 +48,8 @@ export const TransactionForm: React.FC = () => {
           placeholder="Add amount"
           label="Amount"
           formField={true}
-          type="string"
+          type="text"
+          className="text-sm"
           error={errors.amount ? errors.amount.message : undefined}
         />
         <Select
@@ -56,6 +58,7 @@ export const TransactionForm: React.FC = () => {
           label="Transaction type"
           formField={true}
           options={selectOptions}
+          className="text-sm"
           error={errors.type ? errors.type.message : undefined}
         />
       </div>

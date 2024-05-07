@@ -22,7 +22,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           className={cn(
             className,
-            formField ? "p-2 border border-black rounded" : ""
+            formField
+              ? "p-2 border border-bodydark1 focus:outline-none !bg-white rounded"
+              : ""
           )}
           ref={ref}
           {...props}
