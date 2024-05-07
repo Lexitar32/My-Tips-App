@@ -1,4 +1,5 @@
 import { useColorMode } from "@hooks/useColorMode";
+import { Input } from "@components/ui/Input";
 
 export const DarkModeSwitcher = () => {
   const { colorMode, setColorMode } = useColorMode();
@@ -10,7 +11,7 @@ export const DarkModeSwitcher = () => {
           colorMode === "dark" ? "bg-primary" : "bg-stroke"
         }`}
       >
-        <input
+        <Input
           type="checkbox"
           onChange={() => {
             if (typeof setColorMode === "function") {

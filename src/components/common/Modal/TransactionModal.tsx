@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { Transition } from "@headlessui/react";
 import { CancelIcon } from "@assets/icons/CancelIcon";
-import { Button } from "@components/ui/Button";
 import { useModalContext } from "@contexts/ModalContext";
+import { TransactionForm } from "@components/common/Form/TransactionForm";
 
 export const TransactionModal: React.FC = () => {
   const { openModal, setOpenModal } = useModalContext();
@@ -10,10 +10,10 @@ export const TransactionModal: React.FC = () => {
   return (
     <Transition
       show={openModal}
-      enter="transition duration-300 ease-out"
+      enter="transition duration-200 ease-out"
       enterFrom="opacity-0"
       enterTo="opacity-100"
-      leave="transition duration-300 ease-out"
+      leave="transition duration-200 ease-out"
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
       as={Fragment}
@@ -33,13 +33,8 @@ export const TransactionModal: React.FC = () => {
                 transaction now!
               </p>
 
-              <div className="flex justify-end mt-5">
-                <Button
-                  title={"Add transaction"}
-                  withIcon={false}
-                  variant="contained"
-                  size="medium"
-                />
+              <div className="mt-5">
+                <TransactionForm />
               </div>
             </div>
           </div>

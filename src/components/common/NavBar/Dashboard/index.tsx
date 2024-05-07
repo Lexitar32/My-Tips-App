@@ -70,7 +70,7 @@ const DashboardHeader: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => {
             <Input
               type="text"
               placeholder="Type to search..."
-              style="w-full pr-4 bg-transparent pl-9 focus:outline-none"
+              className="w-full pr-4 bg-transparent pl-9 focus:outline-none"
             />
           </div>
         </div>
