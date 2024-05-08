@@ -1,11 +1,13 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { PlusIcon } from "@assets/icons/PlusIcon";
 import { cn } from "@utils/helpers";
+import { SubmittingIcon } from "@assets/icons/SubmittingIcon";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "contained" | "outlined" | "text";
   size?: "large" | "medium" | "small";
   className?: string;
+  isSubmitting?: boolean;
   title: string;
   withIcon: boolean;
 }
@@ -25,7 +27,8 @@ const sizeStyles = {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
-    const { title, withIcon, size, className, variant, ...rest } = props;
+    const { title, withIcon, size, className, variant, isSubmitting, ...rest } =
+      props;
 
     const variantClassName =
       variantStyles[variant || "contained"] || variantStyles.contained;
@@ -39,13 +42,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
 
     return (
-      <button {...rest} ref={ref} className={mergedClassName}>
+      <button
+        {...rest}
+        ref={ref}
+        className={mergedClassName}
+        disabled={isSubmitting}
+      >
         {withIcon && (
           <div className="pr-1">
             <PlusIcon />
           </div>
         )}
-        {title}
+
+        {isSubmitting ? (
+          <div className="flex items-center">
+            <SubmittingIcon className="w-5 h-5 mr-2 animate-spin" />
+            Processing
+          </div>
+        ) : (
+          title
+        )}
       </button>
     );
   }

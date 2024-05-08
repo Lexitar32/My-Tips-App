@@ -1,33 +1,28 @@
 import * as React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Input } from "@components/ui/Input";
 import { Button } from "@components/ui/Button";
 import { Select } from "@components/ui/Input/Select";
 import { selectOptions } from "@constants/formOptions";
 import ErrorMessage from "@components/ui/ErrorMessage";
-
-// Define Zod schema for form data validation
-const schema = z.object({
-  description: z.string().min(1),
-  type: z.enum(["Income", "Expenses"]),
-  amount: z.string().min(1),
-});
-
-// Define types for form data
-type FormData = z.infer<typeof schema>;
+import { transactionSchema, FormData } from "@interfaces/schema";
 
 export const TransactionForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(transactionSchema),
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
     console.log(data);
   };
 
@@ -44,11 +39,11 @@ export const TransactionForm: React.FC = () => {
           error={errors.description ? errors.description.message : undefined}
         />
         <Input
-          {...register("amount")}
+          {...register("amount", { valueAsNumber: true })}
           placeholder="Add amount"
           label="Amount"
           formField={true}
-          type="text"
+          type="number"
           className="text-sm"
           error={errors.amount ? errors.amount.message : undefined}
         />
@@ -69,6 +64,8 @@ export const TransactionForm: React.FC = () => {
           withIcon={false}
           variant="contained"
           size="medium"
+          isSubmitting={isSubmitting}
+          className="disabled:cursor-not-allowed"
         />
       </div>
 
