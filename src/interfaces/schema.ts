@@ -5,7 +5,9 @@ export const transactionSchema = z.object({
   description: z
     .string()
     .min(1, { message: "Description must contain at least 1 character(s)" }),
-  type: z.enum(["Income", "Expenses"]),
+  type: z.enum(["Income", "Expenses"], {
+    message: "Transaction type must be either Income or Expenses",
+  }),
   amount: z
     .number({
       required_error: "required field",
