@@ -1,9 +1,9 @@
-import * as React from "react";
 import { useBudget } from "@contexts/BudgetContext";
 import { BalanceCard } from "@components/BalanceCard";
 import { Button } from "@components/ui/Button";
 import { TransactionModal } from "@components/common/Modal/TransactionModal";
 import { useModalContext } from "@contexts/ModalContext";
+import { TransactionsTable } from "@components/TransactionsTable";
 
 const DashboardPage = () => {
   const { state } = useBudget();
@@ -14,7 +14,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div>
+    <div className="font-mont">
       <div className="flex justify-between">
         <BalanceCard title={"Total Balance"} amount={state.walletBalance} />
         <BalanceCard title={"Income"} amount={state.incomeBalance} />
@@ -28,9 +28,40 @@ const DashboardPage = () => {
           size="large"
           onClick={handleModal}
         />
-
-        <TransactionModal />
       </div>
+
+      <div className="mt-10 mb-5">
+        <div className="sm:flex sm:items-center">
+          <div className="sm:flex-auto">
+            <h1 className="text-base font-semibold leading-6 text-gray-900">
+              All Transactions
+            </h1>
+            <p className="mt-2 text-sm text-gray-700">
+              A list of all the transactions for this month including their
+              description, type, and date created.
+            </p>
+          </div>
+          <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+            <button
+              type="button"
+              className="block px-3 py-2 text-sm font-semibold text-center text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Add user
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex">
+        <div className="w-full mr-5">
+          <TransactionsTable />
+        </div>
+        <div className="w-full">
+          <TransactionsTable />
+        </div>
+      </div>
+
+      <TransactionModal />
     </div>
   );
 };
