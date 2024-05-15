@@ -28,7 +28,3 @@ export type BudgetAction =
   | { type: "ADD_TRANSACTION"; payload: ITransactions }
   | { type: "EDIT_TRANSACTION"; payload: string }
   | { type: "DELETE_TRANSACTION"; payload: string };
-
-export interface IWallet {
-  walletBalance: number;
-}

@@ -13,8 +13,6 @@ const DashboardPage = () => {
     setOpenModal(!openModal);
   };
 
-  console.log(state);
-
   return (
     <div>
       <div className="flex justify-between">

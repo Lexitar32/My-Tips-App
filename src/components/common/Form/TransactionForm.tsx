@@ -29,7 +29,7 @@ export const TransactionForm: React.FC = () => {
     await new Promise<void>((resolve) => {
       setTimeout(() => {
         resolve();
-      }, 2000);
+      }, 1000);
     });
 
     dispatch({
