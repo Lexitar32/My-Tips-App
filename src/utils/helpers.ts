@@ -2,10 +2,12 @@ import { ITransactions } from "@interfaces/budget";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+// function to format amount
 export const formatAmount = (amount: number) => {
   return amount.toLocaleString();
 };
 
+// function to combine classnames
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
