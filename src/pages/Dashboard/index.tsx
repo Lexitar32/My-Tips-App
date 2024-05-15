@@ -6,12 +6,14 @@ import { TransactionModal } from "@components/common/Modal/TransactionModal";
 import { useModalContext } from "@contexts/ModalContext";
 
 const DashboardPage = () => {
-  const { state, dispatch } = useBudget();
+  const { state } = useBudget();
   const { openModal, setOpenModal } = useModalContext();
 
   const handleModal = () => {
     setOpenModal(!openModal);
   };
+
+  console.log(state);
 
   return (
     <div>

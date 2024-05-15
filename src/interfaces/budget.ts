@@ -1,23 +1,9 @@
 import { ReactNode } from "react";
 
-export interface IExpenses {
-  title: string;
-  description: string;
-  date: string;
-  amount: number;
-}
-
-export interface Income {
-  title: string;
-  description: string;
-  date: string;
-  amount: number;
-}
-
 export interface ITransactions {
-  title: string;
+  id: string;
   description: string;
-  date: string;
+  transactionDate: string;
   amount: number;
   type: string;
 }
@@ -27,8 +13,6 @@ export interface BudgetState {
   incomeBalance: number;
   expensesBalance: number;
   transactions: ITransactions[];
-  incomes: Income[];
-  expenses: IExpenses[];
 }
 
 export interface BudgetContextType {
@@ -41,9 +25,9 @@ export interface BudgetProviderProps {
 }
 
 export type BudgetAction =
-  | { type: "FUND_WALLET"; payload: number }
-  | { type: "EDIT_WALLET"; payload: string }
-  | { type: "CLEAR_WALLET_BALANCE"; payload: Income };
+  | { type: "ADD_TRANSACTION"; payload: ITransactions }
+  | { type: "EDIT_TRANSACTION"; payload: string }
+  | { type: "DELETE_TRANSACTION"; payload: string };
 
 export interface IWallet {
   walletBalance: number;

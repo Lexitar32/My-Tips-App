@@ -1,14 +1,16 @@
 import * as React from "react";
 import { budgetReducer } from "@contexts/reducers/budgetReducer";
-import { BudgetContextType, BudgetProviderProps } from "@interfaces/budget";
+import {
+  BudgetContextType,
+  BudgetProviderProps,
+  ITransactions,
+} from "@interfaces/budget";
 
 const initialState = {
   walletBalance: 0,
   incomeBalance: 0,
   expensesBalance: 0,
   transactions: [],
-  incomes: [],
-  expenses: [],
 };
 
 const BudgetContext = React.createContext<BudgetContextType | null>(null);
@@ -29,3 +31,10 @@ export const useBudget = () => {
     throw new Error("Budget context can only be used within budget provider");
   return context;
 };
+
+// Filter the incomes and expenses from transactions array
+export const getIncomeTransactions = (transactions: ITransactions[]) =>
+  transactions.filter((transaction) => transaction.type === "income");
+
+export const getExpenseTransactions = (transactions: ITransactions[]) =>
+  transactions.filter((transaction) => transaction.type === "expense");

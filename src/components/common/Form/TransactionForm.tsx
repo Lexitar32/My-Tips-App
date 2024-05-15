@@ -1,4 +1,6 @@
 import * as React from "react";
+import moment from "moment";
+import { v4 as uuidv4 } from "uuid";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@components/ui/Input";
@@ -7,8 +9,12 @@ import { Select } from "@components/ui/Input/Select";
 import { selectOptions } from "@constants/formOptions";
 import ErrorMessage from "@components/ui/ErrorMessage";
 import { transactionSchema, FormData } from "@interfaces/schema";
+import { useBudget } from "@contexts/BudgetContext";
+import { useModalContext } from "@contexts/ModalContext";
 
 export const TransactionForm: React.FC = () => {
+  const { state, dispatch } = useBudget();
+  const { setOpenModal } = useModalContext();
   const {
     register,
     handleSubmit,
@@ -18,12 +24,19 @@ export const TransactionForm: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const transactionDate = moment().format("LL");
+    const id = uuidv4();
     await new Promise<void>((resolve) => {
       setTimeout(() => {
         resolve();
       }, 2000);
     });
-    console.log(data);
+
+    dispatch({
+      type: "ADD_TRANSACTION",
+      payload: { ...data, id, transactionDate },
+    });
+    setOpenModal(false);
   };
 
   return (
