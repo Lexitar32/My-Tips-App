@@ -1,4 +1,8 @@
-import { useBudget } from "@contexts/BudgetContext";
+import {
+  getExpenseTransactions,
+  getIncomeTransactions,
+  useBudget,
+} from "@contexts/BudgetContext";
 import { BalanceCard } from "@components/BalanceCard";
 import { Button } from "@components/ui/Button";
 import { TransactionModal } from "@components/common/Modal/TransactionModal";
@@ -8,6 +12,8 @@ import { TransactionsTable } from "@components/TransactionsTable";
 const DashboardPage = () => {
   const { state } = useBudget();
   const { openModal, setOpenModal } = useModalContext();
+  const incomes = getIncomeTransactions(state.transactions);
+  const expenses = getExpenseTransactions(state.transactions);
 
   const handleModal = () => {
     setOpenModal(!openModal);
@@ -16,7 +22,7 @@ const DashboardPage = () => {
   return (
     <div className="font-mont">
       <div className="flex justify-between">
-        <BalanceCard title={"Total Balance"} amount={state.walletBalance} />
+        <BalanceCard title={"Wallet Balance"} amount={state.walletBalance} />
         <BalanceCard title={"Income"} amount={state.incomeBalance} />
         <BalanceCard title={"Expenses"} amount={state.expensesBalance} />
       </div>
@@ -41,23 +47,15 @@ const DashboardPage = () => {
               description, type, and date created.
             </p>
           </div>
-          <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <button
-              type="button"
-              className="block px-3 py-2 text-sm font-semibold text-center text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Add user
-            </button>
-          </div>
         </div>
       </div>
 
       <div className="flex">
         <div className="w-full mr-5">
-          <TransactionsTable />
+          <TransactionsTable tableTitle="Income" tableData={incomes} />
         </div>
         <div className="w-full">
-          <TransactionsTable />
+          <TransactionsTable tableTitle="Expenses" tableData={expenses} />
         </div>
       </div>
 

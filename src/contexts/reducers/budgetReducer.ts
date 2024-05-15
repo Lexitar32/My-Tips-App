@@ -12,13 +12,13 @@ const addNewTransaction = (state: BudgetState, data: ITransactions) => {
   };
 };
 
-const editTransaction = (state: BudgetState, walletId: string) => {
+const editTransaction = (state: BudgetState, transactionId: string) => {
   return {
     ...state,
   };
 };
 
-const deleteTransaction = (state: BudgetState) => {
+const deleteTransaction = (state: BudgetState, transactionId: string) => {
   return {
     ...state,
   };
@@ -34,7 +34,7 @@ export const budgetReducer = (
     case "EDIT_TRANSACTION":
       return editTransaction(state, action.payload);
     case "DELETE_TRANSACTION":
-      return deleteTransaction(state);
+      return deleteTransaction(state, action.payload);
     default:
       return state;
   }
