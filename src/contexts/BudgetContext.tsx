@@ -34,7 +34,7 @@ export const useBudget = () => {
 
 // Filter the incomes and expenses from transactions array
 export const getIncomeTransactions = (transactions: ITransactions[]) =>
-  transactions.filter((transaction) => transaction.type === "income");
+  transactions.filter((transaction) => transaction.type === "Income");
 
 export const getExpenseTransactions = (transactions: ITransactions[]) =>
-  transactions.filter((transaction) => transaction.type === "expense");
+  transactions.filter((transaction) => transaction.type === "Expenses");
