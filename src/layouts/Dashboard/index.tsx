@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import Header from "@components/common/NavBar/Dashboard";
 import Sidebar from "@components/common/Sidebar";
 import { Outlet } from "react-router-dom";
@@ -23,6 +24,8 @@ const DashboardLayout = () => {
           </div>
         </div>
       </div>
+
+      <Toaster />
     </BudgetProvider>
   );
 };

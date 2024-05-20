@@ -8,16 +8,21 @@ import { Button } from "@components/ui/Button";
 import { TransactionModal } from "@components/common/Modal/TransactionModal";
 import { useModalContext } from "@contexts/ModalContext";
 import { TransactionsTable } from "@components/TransactionsTable";
+import { useFetchTransactions } from "@services/transactions/useFetchTransactions";
 
 const DashboardPage = () => {
   const { state } = useBudget();
   const { openModal, setOpenModal } = useModalContext();
+  const { isLoading, isError } = useFetchTransactions();
   const incomes = getIncomeTransactions(state.transactions);
   const expenses = getExpenseTransactions(state.transactions);
 
   const handleModal = () => {
     setOpenModal(!openModal);
   };
+
+  if (isLoading) return <div>Fetching...</div>;
+  if (isError) return <div>Error loading transactions.</div>;
 
   return (
     <div className="font-mont">

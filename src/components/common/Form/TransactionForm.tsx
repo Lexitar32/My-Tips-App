@@ -11,10 +11,12 @@ import ErrorMessage from "@components/ui/ErrorMessage";
 import { transactionSchema, FormData } from "@interfaces/schema";
 import { useBudget } from "@contexts/BudgetContext";
 import { useModalContext } from "@contexts/ModalContext";
+import { useCreateTransaction } from "@services/transactions/useCreateTransaction";
 
 export const TransactionForm: React.FC = () => {
-  const { state, dispatch } = useBudget();
+  const { dispatch } = useBudget();
   const { setOpenModal } = useModalContext();
+  const { mutate: createTransaction } = useCreateTransaction();
   const {
     register,
     handleSubmit,
@@ -26,16 +28,8 @@ export const TransactionForm: React.FC = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const transactionDate = moment().format("LL");
     const id = uuidv4();
-    await new Promise<void>((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 1000);
-    });
 
-    dispatch({
-      type: "ADD_TRANSACTION",
-      payload: { ...data, id, transactionDate },
-    });
+    createTransaction({ ...data, transactionId: id, transactionDate });
     setOpenModal(false);
   };
 

@@ -56,7 +56,7 @@ export const TransactionsTable: React.FC<Props> = ({
                   {tableData?.length ? (
                     tableData?.map((transaction: ITransactions) => (
                       <tr
-                        key={transaction.id}
+                        key={transaction.transactionId}
                         className="divide-x divide-bodydark1"
                       >
                         <td className="py-4 pl-4 pr-3 text-sm font-medium whitespace-nowrap">

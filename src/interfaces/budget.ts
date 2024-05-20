@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface ITransactions {
-  id: string;
+  transactionId: string;
   description: string;
   transactionDate: string;
   amount: number;
@@ -26,5 +26,6 @@ export interface BudgetProviderProps {
 
 export type BudgetAction =
   | { type: "ADD_TRANSACTION"; payload: ITransactions }
+  | { type: "SET_TRANSACTIONS"; payload: ITransactions[] }
   | { type: "EDIT_TRANSACTION"; payload: string }
   | { type: "DELETE_TRANSACTION"; payload: string };

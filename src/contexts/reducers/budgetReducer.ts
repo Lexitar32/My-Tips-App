@@ -12,6 +12,15 @@ const addNewTransaction = (state: BudgetState, data: ITransactions) => {
   };
 };
 
+const setTransactions = (state: BudgetState, transactions: ITransactions[]) => {
+  const balances = updateBalances(transactions);
+  return {
+    ...state,
+    transactions,
+    ...balances,
+  };
+};
+
 const editTransaction = (state: BudgetState, transactionId: string) => {
   return {
     ...state,
@@ -31,6 +40,8 @@ export const budgetReducer = (
   switch (action.type) {
     case "ADD_TRANSACTION":
       return addNewTransaction(state, action.payload);
+    case "SET_TRANSACTIONS":
+      return setTransactions(state, action.payload);
     case "EDIT_TRANSACTION":
       return editTransaction(state, action.payload);
     case "DELETE_TRANSACTION":
