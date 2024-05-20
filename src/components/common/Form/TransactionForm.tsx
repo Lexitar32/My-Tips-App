@@ -9,12 +9,10 @@ import { Select } from "@components/ui/Input/Select";
 import { selectOptions } from "@constants/formOptions";
 import ErrorMessage from "@components/ui/ErrorMessage";
 import { transactionSchema, FormData } from "@interfaces/schema";
-import { useBudget } from "@contexts/BudgetContext";
 import { useModalContext } from "@contexts/ModalContext";
 import { useCreateTransaction } from "@services/transactions/useCreateTransaction";
 
 export const TransactionForm: React.FC = () => {
-  const { dispatch } = useBudget();
   const { setOpenModal } = useModalContext();
   const { mutate: createTransaction } = useCreateTransaction();
   const {
