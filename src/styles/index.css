@@ -16,3 +16,14 @@ select:-webkit-autofill:focus {
   background-color: #fff;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.table-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.table-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

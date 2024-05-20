@@ -44,7 +44,7 @@ const DashboardPage = () => {
 
   return (
     <div className="font-mont">
-      <div className="flex justify-between">
+      <div className="flex flex-col justify-between sm:flex-row">
         <BalanceCard title={"Wallet Balance"} amount={state.walletBalance} />
         <BalanceCard title={"Income"} amount={state.incomeBalance} />
         <BalanceCard title={"Expenses"} amount={state.expensesBalance} />

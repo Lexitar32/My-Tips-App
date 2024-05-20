@@ -11,9 +11,9 @@ const DashboardLayout = () => {
   return (
     <BudgetProvider>
       <div className="bg-gray-2 dark:bg-boxdark-2 dark:text-bodydark">
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex h-screen">
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          <div className="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
+          <div className="relative flex flex-col flex-1 overflow-y-auto">
             <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             <main>
