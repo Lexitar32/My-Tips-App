@@ -9,16 +9,22 @@ import { TransactionModal } from "@components/common/Modal/TransactionModal";
 import { useModalContext } from "@contexts/ModalContext";
 import { TransactionsTable } from "@components/TransactionsTable";
 import { useFetchTransactions } from "@services/transactions/useFetchTransactions";
+import { useDeleteTransaction } from "@services/transactions/useDeleteTransaction";
 
 const DashboardPage = () => {
   const { state } = useBudget();
   const { openModal, setOpenModal } = useModalContext();
   const { isLoading, isError } = useFetchTransactions();
+  const { mutate: deleteTransaction } = useDeleteTransaction();
   const incomes = getIncomeTransactions(state.transactions);
   const expenses = getExpenseTransactions(state.transactions);
 
   const handleModal = () => {
     setOpenModal(!openModal);
+  };
+
+  const handleDeleteTransaction = (transactionId: string) => {
+    deleteTransaction(transactionId);
   };
 
   if (isLoading) return <div>Fetching...</div>;
@@ -55,13 +61,19 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <div className="flex">
-        <div className="w-full mr-5">
-          <TransactionsTable tableTitle="Income" tableData={incomes} />
-        </div>
-        <div className="w-full">
-          <TransactionsTable tableTitle="Expenses" tableData={expenses} />
-        </div>
+      <div className="max-w-full">
+        <TransactionsTable
+          tableTitle="Income"
+          tableData={incomes}
+          handleDeleteTransaction={handleDeleteTransaction}
+        />
+      </div>
+      <div className="max-w-full">
+        <TransactionsTable
+          tableTitle="Expenses"
+          tableData={expenses}
+          handleDeleteTransaction={handleDeleteTransaction}
+        />
       </div>
 
       <TransactionModal />

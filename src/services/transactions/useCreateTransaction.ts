@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@services/client";
 import { ITransactions } from "@interfaces/budget";
-import { useBudget } from "@contexts/BudgetContext";
+import toast from "react-hot-toast";
 
 const createTransactionFn = async (newTransaction: ITransactions) => {
   const response = await apiClient.post("/transactions", newTransaction);
@@ -10,7 +10,6 @@ const createTransactionFn = async (newTransaction: ITransactions) => {
 
 export function useCreateTransaction() {
   const queryClient = useQueryClient();
-  const { dispatch } = useBudget();
 
   return useMutation({
     mutationFn: createTransactionFn,
@@ -28,11 +27,6 @@ export function useCreateTransaction() {
       return { optimisticTransaction: newTransaction };
     },
     onSuccess: (result, variables, context) => {
-      dispatch({
-        type: "ADD_TRANSACTION",
-        payload: context.optimisticTransaction,
-      });
-
       // Replace optimistic transaction in the transaction list with the result
       queryClient.setQueryData(["transactions"], (old: ITransactions[] = []) =>
         old.map((transaction) =>
@@ -42,6 +36,11 @@ export function useCreateTransaction() {
             : transaction
         )
       );
+
+      toast.success("Transaction created successfully", {
+        duration: 4000,
+        position: "top-center",
+      });
     },
     onError: (error, variables, context) => {
       // Remove optimistic transaction from the transaction list
@@ -52,6 +51,11 @@ export function useCreateTransaction() {
             context?.optimisticTransaction.transactionId
         )
       );
+
+      toast.error("Failed to create transaction", {
+        duration: 4000,
+        position: "top-center",
+      });
     },
   });
 }

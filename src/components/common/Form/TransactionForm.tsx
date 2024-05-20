@@ -27,7 +27,11 @@ export const TransactionForm: React.FC = () => {
     const transactionDate = moment().format("LL");
     const id = uuidv4();
 
-    createTransaction({ ...data, transactionId: id, transactionDate });
+    createTransaction({
+      ...data,
+      transactionId: id,
+      transactionDate,
+    });
     setOpenModal(false);
   };
 

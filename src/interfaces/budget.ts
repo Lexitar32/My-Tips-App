@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export interface ITransactions {
+  id?: string;
   transactionId: string;
   description: string;
   transactionDate: string;

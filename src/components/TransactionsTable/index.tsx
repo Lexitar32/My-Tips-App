@@ -1,17 +1,23 @@
+import * as React from "react";
+import { EmptyState } from "@components/common/EmptyState";
 import { DateIcon } from "@assets/icons/DateIcon";
+import { DeleteIcon } from "@assets/icons/DeleteIcon";
+import { EditIcon } from "@assets/icons/EditIcon";
 import { MoneyIcon } from "@assets/icons/MoneyIcon";
 import { TextIcon } from "@assets/icons/TextIcon";
-import { EmptyState } from "@components/common/EmptyState";
 import { ITransactions } from "@interfaces/budget";
+import { formatAmount } from "@utils/helpers";
 
 interface Props {
   tableTitle?: string;
   tableData: ITransactions[];
+  handleDeleteTransaction: (transactionId: string) => void;
 }
 
 export const TransactionsTable: React.FC<Props> = ({
   tableTitle,
   tableData,
+  handleDeleteTransaction,
 }) => {
   return (
     <div className="mt-5">
@@ -50,15 +56,14 @@ export const TransactionsTable: React.FC<Props> = ({
                         <span className="pl-1">Amount</span>
                       </div>
                     </th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-bodydark1">
                   {tableData?.length ? (
-                    tableData?.map((transaction: ITransactions) => (
-                      <tr
-                        key={transaction.transactionId}
-                        className="divide-x divide-bodydark1"
-                      >
+                    tableData?.map((transaction: ITransactions, index) => (
+                      <tr key={index} className="divide-x divide-bodydark1">
                         <td className="py-4 pl-4 pr-3 text-sm font-medium whitespace-nowrap">
                           {transaction.description}
                         </td>
@@ -66,7 +71,20 @@ export const TransactionsTable: React.FC<Props> = ({
                           {transaction.transactionDate}
                         </td>
                         <td className="px-3 py-4 text-sm whitespace-nowrap">
-                          {transaction.amount}
+                          {formatAmount(transaction.amount)}
+                        </td>
+                        <td className="px-3 py-4">
+                          <EditIcon
+                            className={"w-5 h-5 text-meta-3 cursor-pointer"}
+                          />
+                        </td>
+                        <td className="px-3 py-4">
+                          <DeleteIcon
+                            className={"w-5 h-5 text-danger cursor-pointer"}
+                            onClick={() =>
+                              handleDeleteTransaction(`${transaction.id}`)
+                            }
+                          />
                         </td>
                       </tr>
                     ))
