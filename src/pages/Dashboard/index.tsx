@@ -10,9 +10,10 @@ import { useModalContext } from "@contexts/ModalContext";
 import { TransactionsTable } from "@components/TransactionsTable";
 import { useFetchTransactions } from "@services/transactions/useFetchTransactions";
 import { useDeleteTransaction } from "@services/transactions/useDeleteTransaction";
+import { ITransactions } from "@interfaces/budget";
 
 const DashboardPage = () => {
-  const { state } = useBudget();
+  const { state, dispatch } = useBudget();
   const { openModal, setOpenModal } = useModalContext();
   const { isLoading, isError } = useFetchTransactions();
   const { mutate: deleteTransaction } = useDeleteTransaction();
@@ -21,10 +22,21 @@ const DashboardPage = () => {
 
   const handleModal = () => {
     setOpenModal(!openModal);
+    dispatch({
+      type: "RESET_EDIT_TRANSACTION",
+    });
   };
 
   const handleDeleteTransaction = (transactionId: string) => {
     deleteTransaction(transactionId);
+  };
+
+  const handleEditModal = (transaction: ITransactions) => {
+    dispatch({
+      type: "SET_EDIT_TRANSACTION",
+      payload: transaction,
+    });
+    setOpenModal(true);
   };
 
   if (isLoading) return <div>Fetching...</div>;
@@ -66,6 +78,7 @@ const DashboardPage = () => {
           tableTitle="Income"
           tableData={incomes}
           handleDeleteTransaction={handleDeleteTransaction}
+          handleEditModal={handleEditModal}
         />
       </div>
       <div className="max-w-full">
@@ -73,6 +86,7 @@ const DashboardPage = () => {
           tableTitle="Expenses"
           tableData={expenses}
           handleDeleteTransaction={handleDeleteTransaction}
+          handleEditModal={handleEditModal}
         />
       </div>
 

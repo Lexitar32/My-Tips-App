@@ -12,12 +12,14 @@ interface Props {
   tableTitle?: string;
   tableData: ITransactions[];
   handleDeleteTransaction: (transactionId: string) => void;
+  handleEditModal: (transaction: ITransactions) => void;
 }
 
 export const TransactionsTable: React.FC<Props> = ({
   tableTitle,
   tableData,
   handleDeleteTransaction,
+  handleEditModal,
 }) => {
   return (
     <div className="mt-5">
@@ -76,6 +78,7 @@ export const TransactionsTable: React.FC<Props> = ({
                         <td className="px-3 py-4">
                           <EditIcon
                             className={"w-5 h-5 text-meta-3 cursor-pointer"}
+                            onClick={() => handleEditModal(transaction)}
                           />
                         </td>
                         <td className="px-3 py-4">

@@ -14,6 +14,7 @@ export interface BudgetState {
   incomeBalance: number;
   expensesBalance: number;
   transactions: ITransactions[];
+  editTransaction: ITransactions | any;
 }
 
 export interface BudgetContextType {
@@ -26,7 +27,6 @@ export interface BudgetProviderProps {
 }
 
 export type BudgetAction =
-  | { type: "ADD_TRANSACTION"; payload: ITransactions }
   | { type: "SET_TRANSACTIONS"; payload: ITransactions[] }
-  | { type: "EDIT_TRANSACTION"; payload: string }
-  | { type: "DELETE_TRANSACTION"; payload: string };
+  | { type: "SET_EDIT_TRANSACTION"; payload: ITransactions }
+  | { type: "RESET_EDIT_TRANSACTION" };

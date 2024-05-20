@@ -11,27 +11,48 @@ import ErrorMessage from "@components/ui/ErrorMessage";
 import { transactionSchema, FormData } from "@interfaces/schema";
 import { useModalContext } from "@contexts/ModalContext";
 import { useCreateTransaction } from "@services/transactions/useCreateTransaction";
+import { useEditTransaction } from "@services/transactions/useEditTransaction";
+import { useBudget } from "@contexts/BudgetContext";
 
 export const TransactionForm: React.FC = () => {
   const { setOpenModal } = useModalContext();
+  const { state, dispatch } = useBudget();
   const { mutate: createTransaction } = useCreateTransaction();
+  const { mutate: editTransaction } = useEditTransaction();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(transactionSchema),
+    defaultValues: state.editTransaction,
   });
 
+  // Reset form when initialValues change
+  React.useEffect(() => {
+    reset(state.editTransaction);
+  }, [state.editTransaction, reset]);
+
+  // Create or edit transaction submit function
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const transactionDate = moment().format("LL");
     const id = uuidv4();
 
-    createTransaction({
-      ...data,
-      transactionId: id,
-      transactionDate,
-    });
+    if (state.editTransaction?.id) {
+      editTransaction({
+        ...data,
+        id: state.editTransaction?.id,
+        transactionId: state.editTransaction?.transactionId,
+        transactionDate: state.editTransaction?.transactionDate,
+      });
+    } else {
+      createTransaction({
+        ...data,
+        transactionId: id,
+        transactionDate,
+      });
+    }
     setOpenModal(false);
   };
 

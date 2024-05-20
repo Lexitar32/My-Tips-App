@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface props {
+interface props extends React.ButtonHTMLAttributes<HTMLOrSVGElement> {
   className: string;
 }
 

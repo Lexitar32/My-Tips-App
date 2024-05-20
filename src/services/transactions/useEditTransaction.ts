@@ -3,17 +3,20 @@ import { apiClient } from "@services/client";
 import { ITransactions } from "@interfaces/budget";
 import toast from "react-hot-toast";
 
-const deleteTransactionFn = async (transactionId: string) => {
-  const response = await apiClient.delete(`/transactions/${transactionId}`);
+const editTransactionFn = async (newTransaction: ITransactions) => {
+  const response = await apiClient.patch(
+    `/transactions/${newTransaction.id}`,
+    newTransaction
+  );
   return response.data;
 };
 
-export function useDeleteTransaction() {
+export function useEditTransaction() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteTransactionFn,
-    onMutate: async (transactionId: string) => {
+    mutationFn: editTransactionFn,
+    onMutate: async (newTransaction: ITransactions) => {
       // Cancel current queries for the transactions list
       await queryClient.cancelQueries({ queryKey: ["transactions"] });
 
@@ -21,28 +24,27 @@ export function useDeleteTransaction() {
         "transactions",
       ]);
 
-      // Optimistically remove the transaction from the transactions list
       queryClient.setQueryData(["transactions"], (old: ITransactions[] = []) =>
-        old.filter((transaction) => Number(transaction.id) !== Number(transactionId))
+        old.map((transaction) =>
+          Number(transaction.id) === Number(newTransaction.id)
+            ? { ...transaction, ...newTransaction }
+            : transaction
+        )
       );
 
-      return { previousTransactions };
+      // Return context with the optimistic transaction
+      return { previousTransactions, optimisticTransaction: newTransaction };
     },
     onSuccess: (result, variables, context) => {
-      toast.success("Transaction deleted successfully", {
+      toast.success("Transaction edited successfully", {
         duration: 4000,
         position: "top-center",
       });
     },
     onError: (error, variables, context) => {
-      if (context?.previousTransactions) {
-        queryClient.setQueryData(
-          ["transactions"],
-          context.previousTransactions
-        );
-      }
+      queryClient.setQueryData(["transactions"], context?.previousTransactions);
 
-      toast.error("Failed to delete transaction", {
+      toast.error("Failed to edit transaction", {
         duration: 4000,
         position: "top-center",
       });

@@ -11,6 +11,7 @@ const initialState = {
   incomeBalance: 0,
   expensesBalance: 0,
   transactions: [],
+  editTransaction: {},
 };
 
 const BudgetContext = React.createContext<BudgetContextType | null>(null);

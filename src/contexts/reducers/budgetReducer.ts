@@ -1,17 +1,6 @@
 import { BudgetAction, BudgetState, ITransactions } from "@interfaces/budget";
 import { updateBalances } from "@utils/helpers";
 
-const addNewTransaction = (state: BudgetState, data: ITransactions) => {
-  const newTransactions = [...state.transactions, data];
-  const balances = updateBalances(newTransactions);
-
-  return {
-    ...state,
-    transactions: newTransactions,
-    ...balances,
-  };
-};
-
 const setTransactions = (state: BudgetState, transactions: ITransactions[]) => {
   const balances = updateBalances(transactions);
   return {
@@ -21,15 +10,10 @@ const setTransactions = (state: BudgetState, transactions: ITransactions[]) => {
   };
 };
 
-const editTransaction = (state: BudgetState, transactionId: string) => {
+const setEditTransaction = (state: BudgetState, transaction: ITransactions) => {
   return {
     ...state,
-  };
-};
-
-const deleteTransaction = (state: BudgetState, transactionId: string) => {
-  return {
-    ...state,
+    editTransaction: transaction,
   };
 };
 
@@ -38,14 +22,12 @@ export const budgetReducer = (
   action: BudgetAction
 ): BudgetState => {
   switch (action.type) {
-    case "ADD_TRANSACTION":
-      return addNewTransaction(state, action.payload);
     case "SET_TRANSACTIONS":
       return setTransactions(state, action.payload);
-    case "EDIT_TRANSACTION":
-      return editTransaction(state, action.payload);
-    case "DELETE_TRANSACTION":
-      return deleteTransaction(state, action.payload);
+    case "SET_EDIT_TRANSACTION":
+      return setEditTransaction(state, action.payload);
+    case "RESET_EDIT_TRANSACTION":
+      return { ...state, editTransaction: null };
     default:
       return state;
   }
