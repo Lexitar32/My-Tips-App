@@ -16,6 +16,7 @@ import PrivateRoutes from "@utils/PrivateRoutes";
 import { privateRoutes, publicRoutes } from "./routes";
 import { BudgetProvider } from "@contexts/BudgetContext";
 import { ModalProvider } from "@contexts/ModalContext";
+import { NotFound } from "@components/common/ErrorComponent/NotFound";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -62,6 +63,7 @@ const routes = createRoutesFromElements(
         />
       );
     })}
+    <Route path="*" element={<NotFound />} />
   </Route>
 );
 
