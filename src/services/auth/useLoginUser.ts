@@ -34,8 +34,8 @@ export function useLoginUser() {
       };
 
       const accessToken = result.data.accessToken;
-      useLocalStorage("accessToken", accessToken);
-      useLocalStorage("userDetails", user);
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userDetails", JSON.stringify(user));
 
       // Dispatch the user details to the context state
       dispatch({
