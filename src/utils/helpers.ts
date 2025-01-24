@@ -2,6 +2,14 @@ import { ITransactions } from "@interfaces/budget";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+// function to check authentication
+export const checkAuthentication = () => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  // Check if the token exists and return true or false
+  return { token: Boolean(accessToken) };
+};
+
 // function to format amount
 export const formatAmount = (amount: number) => {
   return amount.toLocaleString();

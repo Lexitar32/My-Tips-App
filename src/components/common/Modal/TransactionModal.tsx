@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Transition } from "@headlessui/react";
 import { CancelIcon } from "@assets/icons/CancelIcon";
 import { useModalContext } from "@contexts/ModalContext";
-import { TransactionForm } from "@components/common/Form/TransactionForm";
 
 export const TransactionModal: React.FC = () => {
   const { openModal, setOpenModal } = useModalContext();
@@ -40,9 +39,7 @@ export const TransactionModal: React.FC = () => {
                   transaction now!
                 </p>
 
-                <div className="mt-5">
-                  <TransactionForm />
-                </div>
+                <div className="mt-5"></div>
               </div>
             </div>
           </div>

@@ -1,14 +1,10 @@
 import { Outlet, Navigate } from "react-router-dom";
-
-const checkAuthentication = () => {
-  // TO-DO: Check if user is authenticated and return true or false
-  return { token: true };
-};
+import { checkAuthentication } from "./helpers";
 
 const PrivateRoutes = () => {
-  const { token } = checkAuthentication();
+  const isLoggedIn = checkAuthentication();
 
-  return token ? <Outlet /> : <Navigate to="/" />;
+  return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoutes;

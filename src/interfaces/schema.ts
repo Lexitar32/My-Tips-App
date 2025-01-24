@@ -1,20 +1,22 @@
 import { z } from "zod";
 
-// Define Zod schema for form data validation
-export const transactionSchema = z.object({
-  description: z
-    .string()
-    .min(1, { message: "Description must contain at least 1 character(s)" }),
-  type: z.enum(["Income", "Expenses"], {
-    message: "Transaction type must be either Income or Expenses",
-  }),
-  amount: z
-    .number({
-      required_error: "required field",
-      invalid_type_error: "Amount cannot be empty",
+export const signUpSchema = z.object({
+  fullName: z
+    .string({
+      required_error: "Full Name is required",
     })
-    .min(1),
+    .min(5, { message: "Full Name be at least 3 characters long" }),
+  email: z
+    .string({
+      required_error: "Email is required",
+    })
+    .email("Invalid email address"),
+  password: z
+    .string({
+      required_error: "Password is required",
+    })
+    .min(8, { message: "password must be longer than or equal to 8 characters"
+   }),
 });
 
-// Define types for form data
-export type FormData = z.infer<typeof transactionSchema>;
+export type FormData = z.infer<typeof signUpSchema>;
