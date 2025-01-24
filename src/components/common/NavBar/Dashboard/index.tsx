@@ -1,8 +1,4 @@
-import { Link } from "react-router-dom";
-import { DropdownNotification } from "@components/common/DropDown/DropdownNotification";
 import { DropdownUser } from "@components/common/DropDown/DropdownUser";
-import { Input } from "@components/ui/Input";
-import { SearchIcon } from "@assets/icons/SearchIcon";
 
 interface Props {
   sidebarOpen: boolean;
@@ -54,31 +50,13 @@ const DashboardHeader: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => {
               </span>
             </span>
           </button>
-
-          <Link className="flex-shrink-0 block lg:hidden" to="/">
-            <h3 className="text-xl font-bold">Budget App</h3>
-          </Link>
         </div>
 
         <div className="hidden sm:block">
-          <div className="relative">
-            <button className="absolute left-0 -translate-y-1/2 top-1/2">
-              <SearchIcon className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary" />
-            </button>
-
-            <Input
-              type="text"
-              placeholder="Type to search..."
-              className="w-full pr-4 bg-transparent pl-9 focus:outline-none"
-            />
-          </div>
+          <div className="relative"></div>
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
-          <ul className="flex items-center gap-2 2xsm:gap-4">
-            <DropdownNotification />
-          </ul>
-
           <DropdownUser />
         </div>
       </div>

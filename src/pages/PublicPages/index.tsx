@@ -1,8 +1,11 @@
 import { Header } from "@components/common/NavBar/Public";
+import { checkAuthentication } from "@utils/helpers";
 
-export default function Example() {
+export default function Main() {
+  const isLoggedIn = checkAuthentication();
+
   return (
-    <div className="bg-white">
+    <div className="bg-white font-mont">
       <Header />
       <main>
         <div className="relative isolate">
@@ -32,10 +35,10 @@ export default function Example() {
                   </p>
                   <div className="flex items-center mt-10 gap-x-6">
                     <a
-                      href="/signup"
+                      href={`${isLoggedIn ? "/dashboard" : "/signup"}`}
                       className="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Get started
+                      {isLoggedIn ? "Go to Dashboard" : "Get Started"}
                     </a>
                   </div>
                 </div>

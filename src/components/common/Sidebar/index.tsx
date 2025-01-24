@@ -2,6 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { useEscapeKey } from "@hooks/useEscapeKey";
 import { navMenuData } from "@constants/navMenus";
+import Logo from "@assets/Logo.jpg";
 
 interface Props {
   sidebarOpen: boolean;
@@ -27,9 +28,10 @@ const Sidebar: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => {
       }`}
     >
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <NavLink to="/dashboard">
-          <h3 className="text-xl font-bold">Budget App</h3>
-        </NavLink>
+        <a href="/">
+          <span className="sr-only">My Resources Tips</span>
+          <img alt="Logo" src={Logo} className="w-auto h-10" />
+        </a>
       </div>
 
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
