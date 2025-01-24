@@ -7,7 +7,7 @@ export const checkAuthentication = () => {
   const accessToken = localStorage.getItem("accessToken");
 
   // Check if the token exists and return true or false
-  return { token: Boolean(accessToken) };
+  return Boolean(accessToken);
 };
 
 // function to format amount

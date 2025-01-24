@@ -1,24 +1,24 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@services/client";
-import { NewUser } from "@interfaces/auth";
+import { ExistingUser } from "@interfaces/auth";
 import toast from "react-hot-toast";
 import { useAuth } from "@contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const signupUserFn = async (newUser: NewUser) => {
-  const response = await apiClient.post("/auth/signup", newUser);
+const loginUserFn = async (user: ExistingUser) => {
+  const response = await apiClient.post("/auth/signin", user);
   return response.data;
 };
 
-export function useSignupUser() {
+export function useLoginUser() {
   const queryClient = useQueryClient();
   const { dispatch } = useAuth();
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: signupUserFn,
+    mutationFn: loginUserFn,
     onSuccess: (result) => {
-      toast.success("Sign up successful!", {
+      toast.success("Sign in successful!", {
         duration: 4000,
         position: "top-center",
       });
@@ -38,7 +38,7 @@ export function useSignupUser() {
 
       // Dispatch the user details to the context state
       dispatch({
-        type: "SIGN_UP_USER",
+        type: "LOG_IN_USER",
         payload: user,
       });
 

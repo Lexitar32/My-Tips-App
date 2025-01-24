@@ -7,9 +7,16 @@ const signUpUser = (state: { user: IUser | null }, user: IUser) => {
   };
 };
 
+const loginUser = (state: { user: IUser | null }, user: IUser) => {
+  return {
+    ...state,
+    user,
+  };
+};
+
 const logOutUser = () => {
   return {
-    user: null
+    user: null,
   };
 };
 
@@ -21,6 +28,8 @@ export const authReducer = (
   switch (action.type) {
     case "SIGN_UP_USER":
       return signUpUser(state, action.payload);
+    case "LOG_IN_USER":
+      return loginUser(state, action.payload);
     case "LOG_OUT_USER":
       return logOutUser();
     default:

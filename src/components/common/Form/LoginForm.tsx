@@ -4,19 +4,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@components/ui/Input";
 import { Button } from "@components/ui/Button";
 import ErrorMessage from "@components/ui/ErrorMessage";
-import { signUpSchema, FormData } from "@interfaces/schema";
+import { loginSchema, FormData } from "@interfaces/loginSchema";
+import { useLoginUser } from "@services/auth/useLoginUser";
+import { ExistingUser } from "@interfaces/auth";
 
 export const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(loginSchema),
   });
+  const { mutate: loginUser, isPending } = useLoginUser();
 
-  // Create or edit transaction submit function
-  const onSubmit: SubmitHandler<FormData> = async (data) => {};
+  const onSubmit: SubmitHandler<FormData> = async (data: ExistingUser) => {
+    loginUser(data);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -48,7 +52,7 @@ export const LoginForm: React.FC = () => {
           withIcon={false}
           variant="contained"
           size="medium"
-          isSubmitting={isSubmitting}
+          isSubmitting={isPending}
           className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         />
       </div>

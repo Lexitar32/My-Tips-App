@@ -14,6 +14,7 @@ const AuthLayout = lazy(() => import("@layouts/Auth"));
 // Components
 import Loader from "@components/Loader";
 import PrivateRoutes from "@utils/PrivateRoutes";
+import PublicRoutes from "@utils/PublicRoutes";
 import { privateRoutes, publicRoutes } from "./routes";
 import { BudgetProvider } from "@contexts/BudgetContext";
 import { ModalProvider } from "@contexts/ModalContext";
@@ -63,24 +64,26 @@ const routes = createRoutesFromElements(
     </Route>
 
     {/* AuthLayout for specific public routes */}
-    <Route
-      element={
-        <Suspense fallback={<Loader />}>
-          <AuthLayout />
-        </Suspense>
-      }
-    >
-      {authRoutes.map(({ path, component: Component }, index) => (
-        <Route
-          key={index}
-          path={path}
-          element={
-            <Suspense fallback={<Loader />}>
-              <Component />
-            </Suspense>
-          }
-        />
-      ))}
+    <Route element={<PublicRoutes />}>
+      <Route
+        element={
+          <Suspense fallback={<Loader />}>
+            <AuthLayout />
+          </Suspense>
+        }
+      >
+        {authRoutes.map(({ path, component: Component }, index) => (
+          <Route
+            key={index}
+            path={path}
+            element={
+              <Suspense fallback={<Loader />}>
+                <Component />
+              </Suspense>
+            }
+          />
+        ))}
+      </Route>
     </Route>
 
     {/* Other public routes */}
