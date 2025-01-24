@@ -16,8 +16,6 @@ import Loader from "@components/Loader";
 import PrivateRoutes from "@utils/PrivateRoutes";
 import PublicRoutes from "@utils/PublicRoutes";
 import { privateRoutes, publicRoutes } from "./routes";
-import { BudgetProvider } from "@contexts/BudgetContext";
-import { ModalProvider } from "@contexts/ModalContext";
 import { NotFound } from "@components/common/ErrorComponent/NotFound";
 
 // Filter specific routes for AuthLayout
@@ -38,11 +36,7 @@ const routes = createRoutesFromElements(
         path="/dashboard/*"
         element={
           <Suspense fallback={<Loader />}>
-            <BudgetProvider>
-              <ModalProvider>
-                <DashboardLayout />
-              </ModalProvider>
-            </BudgetProvider>
+            <DashboardLayout />
           </Suspense>
         }
       >
