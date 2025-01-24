@@ -4,6 +4,7 @@ import { ExistingUser } from "@interfaces/auth";
 import toast from "react-hot-toast";
 import { useAuth } from "@contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from "@hooks/useLocalStorage";
 
 const loginUserFn = async (user: ExistingUser) => {
   const response = await apiClient.post("/auth/signin", user);
@@ -33,8 +34,8 @@ export function useLoginUser() {
       };
 
       const accessToken = result.data.accessToken;
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userDetails", JSON.stringify(user));
+      useLocalStorage("accessToken", accessToken);
+      useLocalStorage("userDetails", user);
 
       // Dispatch the user details to the context state
       dispatch({

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-// import { DarkModeSwitcher } from "@components/ui/Button/DarkModeSwitcher";
 import { DropdownNotification } from "@components/common/DropDown/DropdownNotification";
 import { DropdownUser } from "@components/common/DropDown/DropdownUser";
 import { Input } from "@components/ui/Input";
@@ -77,7 +76,6 @@ const DashboardHeader: React.FC<Props> = ({ sidebarOpen, setSidebarOpen }) => {
 
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">
-            {/* <DarkModeSwitcher /> */}
             <DropdownNotification />
           </ul>
 
