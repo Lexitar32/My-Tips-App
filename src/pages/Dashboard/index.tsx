@@ -82,13 +82,13 @@ const DashboardPage = () => {
       </div>
 
       {/* Tip Text and Checkbox */}
-      <div className="flex items-center justify-center mt-10">
+      <div className="flex flex-col items-center justify-center mt-10 lg:flex-row">
         <Checkbox
           checked={checked}
           onChange={handleCheckboxChange}
           customLabelColor="gray"
         />
-        <p className="text-lg w-[700px] text-center">{`"${userDailyTips?.tip}"`}</p>
+        <p className="text-lg mt-5 lg:mt-0 lg:w-[700px] text-center">{`"${userDailyTips?.tip}"`}</p>
       </div>
     </div>
   );
