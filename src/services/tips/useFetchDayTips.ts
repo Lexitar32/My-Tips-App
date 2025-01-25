@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@services/client";
-import { IDailyTips, IDailyTipsResponse } from "@interfaces/tips";
+import { IDailyTipsResponse } from "@interfaces/tips";
 import { useDailyTips } from "@contexts/DailyTipsContext";
 
 const fetchDailyTipsFn = async (category: string): Promise<IDailyTipsResponse> => {

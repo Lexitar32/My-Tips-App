@@ -1,4 +1,3 @@
-import { ITransactions } from "@interfaces/budget";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
