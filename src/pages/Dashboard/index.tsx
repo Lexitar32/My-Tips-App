@@ -1,20 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@components/ui/Button";
 import Checkbox from "@components/ui/Checkbox/Checkbox";
 import { Select } from "@components/ui/Input/Select";
 import { selectOptions } from "@constants/formOptions";
 import { useFetchDailyTips } from "@services/tips/useFetchDayTips";
 import Loader from "@components/Loader";
+import { useCheckTips } from "@services/tips/useCheckTips";
+import { getUserDailyTips, useDailyTips } from "@contexts/DailyTipsContext";
 
 const DashboardPage = () => {
+  const { state } = useDailyTips();
   const [selectedCategory, setSelectedCategory] = useState<string>("Energy");
 
   // Fetch daily tips based on the selected category
-  const {
-    data: dailyTip,
-    isLoading,
-    isError,
-  } = useFetchDailyTips(selectedCategory.toLowerCase());
+  const { isLoading, isError } = useFetchDailyTips(
+    selectedCategory.toLowerCase()
+  );
+  const userDailyTips = getUserDailyTips(state.dailyTips);
+  const [checked, setChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (userDailyTips) {
+      setChecked(userDailyTips.isChecked);
+    }
+  }, [userDailyTips]);
+
+  // Set a tip as checked
+  const { mutate: checkTip } = useCheckTips();
+  const handleCheckboxChange = () => {
+    setChecked((prev) => !prev);
+
+    if (!checked) {
+      checkTip(userDailyTips?.id, {
+        onError: () => {
+          // Revert local state if the mutation fails
+          setChecked((prev) => !prev);
+        },
+      });
+    }
+  };
 
   // Handle category selection
   const handleCategoryChange = (
@@ -51,26 +75,19 @@ const DashboardPage = () => {
       <div className="flex justify-center mt-5">
         <img
           className="w-[650px] h-[350px]"
-          src={dailyTip?.data?.picture}
-          alt={dailyTip?.data?.category}
+          src={userDailyTips?.picture}
+          alt={userDailyTips?.category}
         />
       </div>
 
       {/* Tip Text and Checkbox */}
       <div className="flex items-center justify-center mt-10">
-        <Checkbox />
-        <p className="text-lg w-[700px] text-center">{`"${dailyTip?.data?.tip}"`}</p>
-      </div>
-
-      {/* Next Tip Button */}
-      <div className="flex justify-center mt-5">
-        <Button
-          title={"Next tip"}
-          withIcon={false}
-          variant="contained"
-          size="medium"
-          className="flex justify-center rounded-md bg-black px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        <Checkbox
+          checked={checked}
+          onChange={handleCheckboxChange}
+          customLabelColor="gray"
         />
+        <p className="text-lg w-[700px] text-center">{`"${userDailyTips?.tip}"`}</p>
       </div>
     </div>
   );

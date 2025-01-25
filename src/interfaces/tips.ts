@@ -10,10 +10,6 @@ export interface IDailyTips {
   milestone?: string;
 }
 
-export interface IDailyTipsResponse {
-  data: IDailyTips;
-}
-
 export interface DailyTipsContextType {
   state: { dailyTips: IDailyTips | null };
   dispatch: React.Dispatch<any>;

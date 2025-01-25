@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import UserOne from "@assets/user/user-new.jpeg";
 import { useEscapeKey } from "@hooks/useEscapeKey";
 import { useOnClickOutside } from "@hooks/useOnClickOutside";
-import { getUserMilestone, useDailyTips } from "@contexts/DailyTipsContext";
+import { getUserDailyTips, useDailyTips } from "@contexts/DailyTipsContext";
 
 export const DropdownUser = () => {
   const { state } = useDailyTips();
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const userDetails = JSON.parse(localStorage.getItem("userDetails") || "{}");
-  const userMilestone = getUserMilestone(state.dailyTips);
+  const userMilestone = getUserDailyTips(state.dailyTips);
 
   // Close sidebar by pressing escape key
   useEscapeKey({ open: dropdownOpen, setOpen: setDropdownOpen });

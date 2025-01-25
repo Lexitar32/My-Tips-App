@@ -4,7 +4,6 @@ import {
   DailyTipsContextType,
   DailyTipsProviderProps,
   IDailyTips,
-  IDailyTipsResponse,
 } from "@interfaces/tips";
 
 const initialState: { dailyTips: IDailyTips | null } = {
@@ -31,4 +30,4 @@ export const useDailyTips = () => {
   return context;
 };
 
-export const getUserMilestone = (dailyTips: any) => dailyTips?.data;
+export const getUserDailyTips = (dailyTips: any) => dailyTips?.data;
