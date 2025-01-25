@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Button } from "@components/ui/Button";
 import Checkbox from "@components/ui/Checkbox/Checkbox";
 import { Select } from "@components/ui/Input/Select";
 import { selectOptions } from "@constants/formOptions";
@@ -54,6 +53,8 @@ const DashboardPage = () => {
   if (isError) {
     return <p className="text-lg text-red-500">Error loading daily tip.</p>;
   }
+
+  console.log(userDailyTips);
 
   return (
     <div className="font-mont">
