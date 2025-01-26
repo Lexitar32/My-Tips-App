@@ -27,9 +27,8 @@ const DashboardPage = () => {
   // Set a tip as checked
   const { mutate: checkTip } = useCheckTips();
   const handleCheckboxChange = () => {
-    setChecked((prev) => !prev);
-
     if (!checked) {
+      setChecked((prev) => !prev);
       checkTip(userDailyTips?.id, {
         onError: () => {
           // Revert local state if the mutation fails

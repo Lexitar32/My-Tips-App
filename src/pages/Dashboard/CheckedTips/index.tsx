@@ -22,11 +22,11 @@ const CheckedTips = () => {
 
   return (
     <div className="p-4 font-mont md:p-6">
-      <h2 className="text-base font-semibold">Checked Tips</h2>
+      <h2 className="pt-5 text-base font-semibold lg:text-lg">Checked Tips</h2>
 
       <ul
         role="list"
-        className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8 mt-7"
+        className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8 mt-7"
       >
         {state?.checkedTips?.checkedTips?.map((tip: ICheckedTipsProps) => (
           <li key={tip?.id} className="relative">
@@ -43,8 +43,11 @@ const CheckedTips = () => {
                 <span className="sr-only">View details for tip</span>
               </button>
             </div>
-            <p className="block pt-5 text-sm font-medium text-gray-500 pointer-events-none">
-              {tip?.tip}
+            <p className="block pt-5 text-sm font-bold text-gray-900 uppercase pointer-events-none">
+              {tip?.category}
+            </p>
+            <p className="block pt-2 text-sm font-medium text-gray-500 pointer-events-none">
+              "{tip?.tip}"
             </p>
           </li>
         ))}

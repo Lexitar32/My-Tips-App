@@ -1,12 +1,13 @@
 import Loader from "@components/Loader";
-import { getUserDailyTips, useDailyTips } from "@contexts/DailyTipsContext";
+import { ProgressBar } from "@components/ProgressBar";
 import { useFetchDailyTips } from "@services/tips/useFetchDayTips";
 
 const ProfilePage = () => {
-  const { state } = useDailyTips();
   const { isLoading, isError } = useFetchDailyTips("energy");
-  const userDailyTips = getUserDailyTips(state.dailyTips);
   const userDetails = JSON.parse(localStorage.getItem("userDetails") || "{}");
+
+  // Default to Beginner if no milestone is provided
+  const userMilestone = userDetails?.milestone || "Beginner";
 
   if (isLoading) {
     return (
@@ -22,8 +23,15 @@ const ProfilePage = () => {
 
   return (
     <div className="p-4 md:p-6 font-mont">
-      <div className="flex justify-center mt-5">
-        <div className="w-[500px] p-5 bg-white rounded-lg">
+      <h2 className="pb-5 mt-5 text-base font-semibold lg:text-lg md:hidden">
+        My Profile
+      </h2>
+
+      <div className="flex flex-col items-center">
+        <h2 className="hidden pb-5 text-base font-semibold md:block lg:text-lg">
+          My Profile
+        </h2>
+        <div className="w-full lg:w-[500px] p-5 bg-white rounded-lg">
           <span className="inline-block overflow-hidden bg-gray-100 rounded-full size-6">
             <svg
               fill="currentColor"
@@ -46,12 +54,10 @@ const ProfilePage = () => {
             <p className="text-gray-600 text-sm/6">{userDetails?.email}</p>
           </div>
           <div>
-            <h3 className="mt-6 font-semibold tracking-tight text-gray-900 text-base/7">
+            <h3 className="pb-5 mt-6 font-semibold tracking-tight text-gray-900 text-base/7">
               Milestone
             </h3>
-            <p className="text-gray-600 text-sm/6">
-              {userDailyTips?.milestone}
-            </p>
+            <ProgressBar milestone={userMilestone} />
           </div>
         </div>
       </div>

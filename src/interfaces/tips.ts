@@ -18,6 +18,7 @@ export interface ICheckedTipsProps {
   id: string;
   picture: string;
   tip: string;
+  category: string;
 }
 
 export interface ICheckedTips {
