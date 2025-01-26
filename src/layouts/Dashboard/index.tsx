@@ -24,7 +24,7 @@ const DashboardLayout = () => {
                 setSidebarOpen={setSidebarOpen}
               />
 
-              <main className="border border-black">
+              <main>
                 <div className="min-h-screen mx-auto max-w-screen-2xl 2xl:p-10">
                   <Outlet />
                 </div>
