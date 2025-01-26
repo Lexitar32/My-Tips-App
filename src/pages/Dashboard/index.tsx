@@ -47,17 +47,19 @@ const DashboardPage = () => {
   };
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className="w-full h-screen">
+        <Loader />
+      </div>
+    );
   }
 
   if (isError) {
     return <p className="text-lg text-red-500">Error loading daily tip.</p>;
   }
 
-  console.log(userDailyTips);
-
   return (
-    <div className="font-mont">
+    <div className="p-4 font-mont md:p-6">
       {/* Category Selection */}
       <div className="flex justify-center mt-5">
         <div className="w-[150px]">
