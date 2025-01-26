@@ -24,6 +24,8 @@ export interface ICheckedTipsProps {
 export interface ICheckedTips {
   checkedTips: ICheckedTipsProps[];
   milestone?: string;
+  shareId?: string;
+  username?: string;
 }
 
 export interface ICheckedTipsResponse {

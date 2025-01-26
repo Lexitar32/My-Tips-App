@@ -2,11 +2,20 @@ import Loader from "@components/Loader";
 import { useCheckedTips } from "@contexts/CheckedTipsContext";
 import { ICheckedTipsProps } from "@interfaces/tips";
 import { useFetchCheckedTips } from "@services/tips/useFetchCheckedTips";
+import { useModalContext } from "@contexts/ModalContext";
 import Energy from "@assets/energy.jpeg";
+import { Button } from "@components/ui/Button";
+import ShareIcon from "@assets/icons/ShareIcon";
+import { ShareTipsModal } from "@components/common/Modal/ShareTipsModal";
 
 const CheckedTips = () => {
   const { state } = useCheckedTips();
+  const { setOpenModal } = useModalContext();
   const { isLoading, isError } = useFetchCheckedTips();
+
+  const shareCheckedTips = () => {
+    setOpenModal(true);
+  };
 
   if (isLoading) {
     return (
@@ -22,7 +31,18 @@ const CheckedTips = () => {
 
   return (
     <div className="p-4 font-mont md:p-6">
-      <h2 className="pt-5 text-base font-semibold lg:text-lg">Checked Tips</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="pt-5 text-base font-semibold lg:text-lg">
+          Checked Tips
+        </h2>
+        <Button
+          className="bg-black"
+          onClick={shareCheckedTips}
+          title={"Share Tips"}
+          withIcon={true}
+          icon={<ShareIcon size={16} color="white" />}
+        />
+      </div>
 
       <ul
         role="list"
@@ -52,6 +72,8 @@ const CheckedTips = () => {
           </li>
         ))}
       </ul>
+
+      <ShareTipsModal shareId={state?.checkedTips?.shareId} />
     </div>
   );
 };
