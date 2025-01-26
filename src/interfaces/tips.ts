@@ -23,6 +23,7 @@ export interface ICheckedTipsProps {
 
 export interface ICheckedTips {
   checkedTips: ICheckedTipsProps[];
+  milestone?: string;
 }
 
 export interface ICheckedTipsResponse {

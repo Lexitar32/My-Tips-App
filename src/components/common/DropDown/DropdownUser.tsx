@@ -6,6 +6,7 @@ import { useOnClickOutside } from "@hooks/useOnClickOutside";
 import { getUserDailyTips, useDailyTips } from "@contexts/DailyTipsContext";
 import { LogoutIcon } from "@assets/icons/Logout";
 import { useAuth } from "@contexts/AuthContext";
+import { useCheckedTips } from "@contexts/CheckedTipsContext";
 
 export const DropdownUser = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const userDetails = JSON.parse(localStorage.getItem("userDetails") || "{}");
   const userMilestone = getUserDailyTips(state.dailyTips);
+  const { state: checkedTipState } = useCheckedTips();
 
   // Close sidebar by pressing escape key
   useEscapeKey({ open: dropdownOpen, setOpen: setDropdownOpen });
@@ -48,7 +50,10 @@ export const DropdownUser = () => {
           <span className="block text-sm font-medium text-black dark:text-white">
             {userDetails?.fullName}
           </span>
-          <span className="block text-xs">{userMilestone?.milestone}</span>
+          <span className="block text-xs">
+            {userMilestone?.milestone ||
+              checkedTipState?.checkedTips?.milestone}
+          </span>
         </span>
 
         <img className="w-12 h-12 rounded-full" src={UserOne} alt="User" />
