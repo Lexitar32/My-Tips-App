@@ -2,8 +2,8 @@ import { lazy } from "react";
 
 // Pages
 const Home = lazy(() => import("@pages/PublicPages/index"));
-const LoginPage = lazy(() => import("@pages/PublicPages/Login"));
-const SignupPage = lazy(() => import("@pages/PublicPages/Signup"));
+const LoginPage = lazy(() => import("@pages/PublicPages/login"));
+const SignupPage = lazy(() => import("@pages/PublicPages/signup"));
 const ShareTips = lazy(() => import("@pages/PublicPages/ShareTips"));
 const ProfilePage = lazy(() => import("@pages/Dashboard/Profile"));
 const CheckedTips = lazy(() => import("@pages/Dashboard/CheckedTips"));
